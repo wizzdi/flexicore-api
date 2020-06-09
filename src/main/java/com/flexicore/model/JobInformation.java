@@ -1,0 +1,165 @@
+/*******************************************************************************
+ *  Copyright (C) FlexiCore, Inc - All Rights Reserved
+ *  Unauthorized copying of this file, via any medium is strictly prohibited
+ *  Proprietary and confidential
+ *  Written by Avishay Ben Natan And Asaf Ben Natan, October 2015
+ ******************************************************************************/
+package com.flexicore.model;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Properties;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.flexicore.annotations.AnnotatedClazz;
+import com.flexicore.data.jsoncontainers.Views;
+import com.flexicore.enums.ExecutionPolicy;
+import com.flexicore.interfaces.ProccessPlugin;
+
+@AnnotatedClazz(Category = "JobInformation", Name = "JobInformation", Description = "holds jobs information")
+
+/**
+ * holds job information related to processing flow
+ * @author Asaf
+ *
+ */
+public class JobInformation {
+    private Class<? extends ProccessPlugin> handler;
+    private Serializable jobInfo;
+    private boolean handle;
+    private HashMap<String, PluginRequirement> requirments = new HashMap<>();
+    private Result previousPhaseResult;
+    private Result currrentPhaseResult;
+    private boolean mergeWithOthers;
+    private ExecutionPolicy executionPolicy = ExecutionPolicy.First;
+
+    private Properties jobProperties;
+
+
+    public JobInformation() {
+        // TODO Auto-generated constructor stub
+    }
+
+
+    @JsonIgnore
+    public Class<? extends ProccessPlugin> getHandler() {
+        return handler;
+    }
+
+
+    public void setHandler(Class<? extends ProccessPlugin> handler) {
+        this.handler = handler;
+    }
+
+
+    @JsonIgnore
+    public boolean isHandle() {
+        return handle;
+    }
+
+
+    public void setHandle(boolean handle) {
+        this.handle = handle;
+    }
+
+
+    @JsonIgnore
+    public Result getPreviousPhaseResult() {
+        return previousPhaseResult;
+    }
+
+
+    public void setPreviousPhaseResult(Result previousPhaseResult) {
+        this.previousPhaseResult = previousPhaseResult;
+    }
+
+
+    @JsonIgnore
+    public boolean isMergeWithOthers() {
+        return mergeWithOthers;
+    }
+
+
+    public void setMergeWithOthers(boolean mergeWithOthers) {
+        this.mergeWithOthers = mergeWithOthers;
+    }
+
+
+    @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+    @JsonSubTypes({@Type(value = FileResource.class)})
+    @JsonIgnore
+    public Serializable getJobInfo() {
+        return jobInfo;
+    }
+
+
+    public void setJobInfo(Serializable jobInfo) {
+        this.jobInfo = jobInfo;
+    }
+
+
+    @JsonIgnore
+    public ExecutionPolicy getExecutionPolicy() {
+        return executionPolicy;
+    }
+
+
+    public void setExecutionPolicy(ExecutionPolicy executionPolicy) {
+        this.executionPolicy = executionPolicy;
+    }
+
+
+    public Result getCurrrentPhaseResult() {
+        return currrentPhaseResult;
+    }
+
+
+    public void setCurrrentPhaseResult(Result currrentPhaseResult) {
+        if (currrentPhaseResult != null) {
+            this.currrentPhaseResult = currrentPhaseResult;
+        }
+
+    }
+
+
+    @JsonIgnore
+    public Properties getJobProperties() {
+        return jobProperties;
+    }
+
+
+    public void setJobProperties(Properties jobProperties) {
+        this.jobProperties = jobProperties;
+    }
+
+
+    @JsonIgnore
+    public HashMap<String, PluginRequirement> getRequirments() {
+        return requirments;
+    }
+
+
+    public void setRequirments(HashMap<String, PluginRequirement> requirments) {
+        this.requirments = requirments;
+    }
+
+
+    @Override
+    public String toString() {
+        return "JobInformation [" + (handler != null ? "handler=" + handler + ", " : "")
+                + (jobInfo != null ? "jobInfo=" + jobInfo + ", " : "") + "handle=" + handle + ", "
+                + (requirments != null ? "requirments=" + requirments + ", " : "")
+                + (previousPhaseResult != null ? "previousPhaseResult=" + previousPhaseResult + ", " : "")
+                + (currrentPhaseResult != null ? "currrentPhaseResult=" + currrentPhaseResult + ", " : "")
+                + "mergeWithOthers=" + mergeWithOthers + ", "
+                + (executionPolicy != null ? "executionPolicy=" + executionPolicy + ", " : "")
+                + (jobProperties != null ? "jobProperties=" + jobProperties : "") + "]";
+    }
+
+
+}

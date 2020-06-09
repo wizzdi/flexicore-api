@@ -1,0 +1,61 @@
+/*******************************************************************************
+ *  Copyright (C) FlexiCore, Inc - All Rights Reserved
+ *  Unauthorized copying of this file, via any medium is strictly prohibited
+ *  Proprietary and confidential
+ *  Written by Avishay Ben Natan And Asaf Ben Natan, October 2015
+ ******************************************************************************/
+package com.flexicore.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.flexicore.annotations.AnnotatedClazz;
+import com.flexicore.security.SecurityContext;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
+import java.util.ArrayList;
+import java.util.List;
+
+@SuppressWarnings("serial")
+@AnnotatedClazz(Category="core", Name="Clazz", Description="Describes all other classes in the system")
+//@Cache(type=CacheType.FULL)
+@Entity
+
+@XmlTransient
+@JsonSubTypes({
+    @JsonSubTypes.Type(value=ClazzLink.class, name="ClazzLink")
+})
+public class Clazz extends Baseclass {
+	static Clazz s_Singleton=new Clazz();
+	public  static Clazz s() {return s_Singleton;}
+
+	public Clazz() {
+	}
+
+	public Clazz(String name, SecurityContext securityContext) {
+		super(name, securityContext);
+	}
+
+	@JsonIgnore
+	@OneToMany(targetEntity = CategoryToClazz.class,mappedBy="rightside",fetch=FetchType.LAZY)
+	private List<CategoryToClazz> CategoriesToClazz=new ArrayList<>();
+
+
+	
+	@JsonIgnore
+	@OneToMany(targetEntity = CategoryToClazz.class,mappedBy="rightside",fetch=FetchType.LAZY)
+	public List<CategoryToClazz> getCategoriesToClazz() {
+		return CategoriesToClazz;
+	}
+
+	public void setCategoriesToClazz(List<CategoryToClazz> categoriesToClazz) {
+		CategoriesToClazz = categoriesToClazz;
+	}
+
+
+
+
+
+}
