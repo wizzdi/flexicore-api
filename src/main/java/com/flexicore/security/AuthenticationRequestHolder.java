@@ -7,6 +7,7 @@
 package com.flexicore.security;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
@@ -28,6 +29,9 @@ public class AuthenticationRequestHolder implements Serializable {
     private String facebookUserId;
 
     private String facebookToken;
+
+    @JsonIgnore
+    private String ip;
 
     public AuthenticationRequestHolder(String mail, String password, String apikey) {
         this.mail = mail;
@@ -125,6 +129,16 @@ public class AuthenticationRequestHolder implements Serializable {
     public AuthenticationRequestHolder setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
         return this;
+    }
+
+    @JsonIgnore
+    public String getIp() {
+        return ip;
+    }
+
+    public <T extends AuthenticationRequestHolder> T setIp(String ip) {
+        this.ip = ip;
+        return (T) this;
     }
 
     @Override
