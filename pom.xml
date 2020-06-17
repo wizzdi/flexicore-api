@@ -4,7 +4,7 @@
 
     <groupId>com.wizzdi</groupId>
     <artifactId>flexicore-api</artifactId>
-    <version>4.0.5</version>
+    <version>4.0.6-SNAPSHOT</version>
 
 
     <properties>
@@ -21,7 +21,7 @@
         <connection>scm:git:git://wizzdi/flexicore-api.git</connection>
         <developerConnection>scm:git:git@github.com:wizzdi/flexicore-api.git</developerConnection>
         <url>https://github.com/wizzdi/flexicore-api</url>
-        <tag>flexicore-api-4.0.5</tag>
+        <tag>flexicore-api-4.0.1</tag>
     </scm>
 
     <distributionManagement>
