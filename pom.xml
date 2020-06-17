@@ -36,16 +36,6 @@
         </repository>
     </distributionManagement>
     <repositories>
-        <repository>
-            <id>sonatype-nexus-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
     </repositories>
 
     <dependencyManagement>
@@ -273,6 +263,11 @@
                         <artifactId>maven-scm-provider-gitexe</artifactId>
                         <version>1.9.5</version>
                     </dependency>
+                    <dependency>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.2.0</version>
+                    </dependency>
                 </dependencies>
             </plugin>
             <plugin>
@@ -290,7 +285,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -299,6 +294,15 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <javadocExecutable>C:\Program Files\AdoptOpenJDK\jdk-8.0.212.03-hotspot\bin\javadoc.exe</javadocExecutable>
+                    <javadocVersion>1.8.0</javadocVersion>
+                </configuration>
             </plugin>
 
 
