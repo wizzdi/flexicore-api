@@ -4,7 +4,7 @@
 
     <groupId>com.wizzdi</groupId>
     <artifactId>flexicore-api</artifactId>
-    <version>4.0.2-SNAPSHOT</version>
+    <version>4.0.1-SNAPSHOT</version>
 
 
     <properties>
@@ -299,14 +299,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <source>8</source>
-                </configuration>
             </plugin>
 
 
