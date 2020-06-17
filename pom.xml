@@ -6,41 +6,35 @@
 
     <groupId>com.wizzdi</groupId>
     <artifactId>flexicore-api</artifactId>
-    <version>4.0.1-spring</version>
+    <version>4.0.1-SNAPSHOT</version>
 
 
     <properties>
-
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <version.surefire.plugin>2.16</version.surefire.plugin>
-        <version.war.plugin>2.5</version.war.plugin>
-        <version.jackson>2.9.5</version.jackson>
-        <jackson.version>2.9.5</jackson.version>
-
-
-        <!-- maven-compiler-plugin -->
         <version.compiler.plugin>3.3</version.compiler.plugin>
-
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
-        <aetherVersion>1.1.0</aetherVersion>
-        <mavenVersion>3.3.3</mavenVersion>
         <swagger.version>2.0.8</swagger.version>
         <version.resteasy>3.6.3.Final</version.resteasy>
-        <wildfly.version>18.0.0.Final</wildfly.version>
         <pf4j-spring.version>0.6.0-SNAPSHOT</pf4j-spring.version>
         <version.eclipselink>2.7.5</version.eclipselink>
-
-
-
-
     </properties>
-    <distributionManagement>
-        <repository>
-            <id>flexicore-local</id>
-            <name>FlexiCore</name>
-            <url>https://artifactory.wizzdi.com/artifactory/flexicore-local</url>
+    <scm>
+        <connection>scm:git:git://wizzdi/flexicore-api.git</connection>
+        <developerConnection>scm:git:git@github.com:wizzdi/flexicore-api.git</developerConnection>
+        <url>https://github.com/wizzdi/flexicore-api</url>
+        <tag>HEAD</tag>
+    </scm>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/
+            </url>
         </repository>
     </distributionManagement>
     <repositories>
@@ -53,11 +47,6 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
-        </repository>
-        <repository>
-            <id>flexicore-local</id>
-            <name>flexicore-local</name>
-            <url>https://artifactory.wizzdi.com/artifactory/flexicore-local</url>
         </repository>
     </repositories>
 
@@ -270,6 +259,53 @@
 
                 </dependencies>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <localCheckout>true</localCheckout>
+                    <pushChanges>false</pushChanges>
+                    <mavenExecutorId>forked-path</mavenExecutorId>
+                    <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.scm</groupId>
+                        <artifactId>maven-scm-provider-gitexe</artifactId>
+                        <version>1.9.5</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>attach-javadoc</id>
+                    </execution>
+                </executions>
+            </plugin>
+
 
 
         </plugins>
@@ -281,4 +317,34 @@
             </resource>
         </resources>
     </build>
+    <profiles>
+        <!-- GPG Signature on release -->
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
