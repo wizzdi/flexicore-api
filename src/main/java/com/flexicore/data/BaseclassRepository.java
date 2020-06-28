@@ -62,6 +62,8 @@ public interface BaseclassRepository {
 
     @Transactional(Transactional.TxType.REQUIRED)
     void merge(Object base);
+    @Transactional(Transactional.TxType.REQUIRED)
+    void merge(Object base,boolean updateUpdateDate);
 
     void remove(Object o);
 
@@ -168,6 +170,9 @@ public interface BaseclassRepository {
 
     @Transactional(Transactional.TxType.REQUIRED)
     void massMerge(List<?> toMerge);
+
+    @Transactional(Transactional.TxType.REQUIRED)
+    void massMerge(List<?> toMerge,boolean updateUpdateDate);
 
     @Transactional(Transactional.TxType.REQUIRED)
     <T extends Baseclass> List<T> findByIds(Class<T> c, Set<String> requested);

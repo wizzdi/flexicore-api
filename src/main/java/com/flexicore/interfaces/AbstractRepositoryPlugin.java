@@ -285,6 +285,16 @@ public abstract class AbstractRepositoryPlugin implements PluginRepository, Exte
         return baseclassRepository.findByIds(c, requested);
     }
 
+    @Transactional(Transactional.TxType.REQUIRED)
+    public void merge(Object base, boolean updateUpdateDate) {
+        baseclassRepository.merge(base, updateUpdateDate);
+    }
+
+    @Transactional(Transactional.TxType.REQUIRED)
+    public void massMerge(List<?> toMerge, boolean updateUpdateDate) {
+        baseclassRepository.massMerge(toMerge, updateUpdateDate);
+    }
+
     public void massDelete(MassDeleteRequest massDeleteRequest) {
         baseclassRepository.massDelete(massDeleteRequest);
     }

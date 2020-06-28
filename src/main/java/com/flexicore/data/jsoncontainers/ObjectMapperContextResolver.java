@@ -10,17 +10,16 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.flexicore.converters.CustomOffsetDateTimeSerializer;
 import com.flexicore.data.jsoncontainers.Views.Unrefined;
 import com.flexicore.interfaces.FlexiCoreClassLoader;
 
-
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
-import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -57,12 +56,11 @@ public class ObjectMapperContextResolver implements ContextResolver<ObjectMapper
         mapper.configure(MapperFeature.IGNORE_DUPLICATE_MODULE_REGISTRATIONS, false);
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         mapper.configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, false);
-
-        SimpleModule mod = new SimpleModule();
-        FieldSetContainerDeserializer<? extends Serializable> s = new FieldSetContainerDeserializer<>();
-        mod.addDeserializer(FieldSetContainer.class, s);
-        mapper.registerModule(mod);
+        mapper.configure(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS,false);
         JavaTimeModule module = new JavaTimeModule();
+        CustomOffsetDateTimeSerializer customOffsetDateTimeSerializer = new CustomOffsetDateTimeSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX"));
+        module.addSerializer(OffsetDateTime.class, customOffsetDateTimeSerializer);
+
         mapper.registerModule(module);
 
         mapper = setView(mapper, view);

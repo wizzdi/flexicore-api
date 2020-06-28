@@ -6,17 +6,19 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.jsontype.impl.TypeIdResolverBase;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class CrossLoaderResolver extends TypeIdResolverBase {
 
     private static Map<String, Class<?>> types = new HashMap<>();
     private JavaType superType;
+    private static final Queue<ClassLoader> classLoaders=new ConcurrentLinkedQueue<>();
 
     @Override
     public void init(JavaType baseType) {
         superType = baseType;
+        classLoaders.add(Thread.currentThread().getContextClassLoader());
     }
 
 
@@ -30,9 +32,21 @@ public class CrossLoaderResolver extends TypeIdResolverBase {
         Class<?> c = types.get(id);
         if(c==null){
             try {
-                c= Class.forName(id,false,superType.getRawClass().getClassLoader());
+                c= Class.forName(id,true,superType.getRawClass().getClassLoader());
             } catch (ClassNotFoundException e) {
-                throw new IOException("could not find type "+id,e);
+                for (ClassLoader classLoader : classLoaders) {
+                    try {
+                        c = Class.forName(id, true, classLoader);
+                        break;
+                    }
+                    catch (ClassNotFoundException ignored){
+
+                    }
+
+                }
+                if(c==null){
+                    throw new IOException("could not find type "+id,e);
+                }
             }
         }
 
@@ -49,9 +63,21 @@ public class CrossLoaderResolver extends TypeIdResolverBase {
         return JsonTypeInfo.Id.CLASS;
     }
 
+    public static void registerClassLoader(ClassLoader... classLoaders){
+        CrossLoaderResolver.classLoaders.addAll(Arrays.asList(classLoaders));
+    }
+
+    public static void registerClassLoader(List<ClassLoader> classLoaders){
+        CrossLoaderResolver.classLoaders.addAll(classLoaders);
+    }
+
     public static void registerClass(Class<?> c){
         types.put(c.getCanonicalName(),c);
     }
+    public static void registerClass(String id,Class<?> c){
+        types.put(id,c);
+    }
+
 
     public static void registerClass(Class<?>... c){
         for (Class<?> aClass : c) {

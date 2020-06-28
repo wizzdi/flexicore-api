@@ -152,13 +152,13 @@ public class BaseclassListener extends DescriptorEventAdapter {
     }
 
     private void updateUpdateDate(OffsetDateTime now, Baseclass b,DescriptorEvent descriptorEvent) {
-        if (!b.isDontUpdateUpdateDate()) {
+        /*if (!b.isDontUpdateUpdateDate()) {
             b.setUpdateDate(now);
             descriptorEvent.getRecord().put(Baseclass_.updateDate.getName().toUpperCase(),now);
         } else {
             b.setDontUpdateUpdateDate(false);
             logger.fine("Did not update " + b.getId() + " update date");
-        }
+        }*/
     }
 
     private String getStackTraceString(Baseclass baseclass) {

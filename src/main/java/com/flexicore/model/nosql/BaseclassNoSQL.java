@@ -59,14 +59,27 @@ public class BaseclassNoSQL implements Syncable {
     }
 
     @Override
+    @BsonIgnore
     public OffsetDateTime getCreationDate() {
         return dateCreated!=null?dateCreated.toInstant().atZone(ZoneId.systemDefault()).toOffsetDateTime():null;
     }
 
     @Override
+    @BsonIgnore
     public OffsetDateTime getUpdateDate() {
         return getCreationDate();
     }
+
+    @BsonIgnore
+    public void setCreationDate(OffsetDateTime offsetDateTime) {
+
+    }
+
+    @BsonIgnore
+    public void setUpdateDate(OffsetDateTime offsetDateTime) {
+
+    }
+
     @Override
     @BsonIgnore
     public boolean isNoSQL() {
