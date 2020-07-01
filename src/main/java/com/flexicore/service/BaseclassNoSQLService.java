@@ -34,6 +34,8 @@ public interface BaseclassNoSQLService extends FlexiCoreService {
      */
     BaseclassNoSQL updateBaseclassNoSQL(BaseclassNoSQLUpdate baseclassNoSQLUpdate);
 
+    boolean updateBaseclassNoSQLNoMerge(BaseclassNoSQL baseclassNoSQL, BaseclassNoSQLCreate create);
+
     void mergeBaseclassNoSQL(BaseclassNoSQL o);
 
     void massMergeBaseclassNoSQL(List<? extends BaseclassNoSQL> o);
