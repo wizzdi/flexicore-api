@@ -28,6 +28,8 @@ public interface FileResourceService extends FlexiCoreService {
 
 
     boolean saveFile(byte[] data, long offsetInFile, FileResource file);
+    void saveFile(InputStream is,String chunkMd5, FileResource file);
+
     void saveFile(InputStream is, FileResource file);
     byte[] readFilePart(File file, long offset);
     /**
