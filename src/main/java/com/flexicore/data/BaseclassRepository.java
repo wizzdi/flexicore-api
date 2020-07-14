@@ -12,7 +12,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Set;
@@ -60,9 +60,9 @@ public interface BaseclassRepository {
 
     List<Field> getAllComplexFields(Class<?> c);
 
-    @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional
     void merge(Object base);
-    @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional
     void merge(Object base,boolean updateUpdateDate);
 
     void remove(Object o);
@@ -168,13 +168,13 @@ public interface BaseclassRepository {
 
     void refrehEntityManager();
 
-    @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional
     void massMerge(List<?> toMerge);
 
-    @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional
     void massMerge(List<?> toMerge,boolean updateUpdateDate);
 
-    @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional
     <T extends Baseclass> List<T> findByIds(Class<T> c, Set<String> requested);
 
     void massDelete(MassDeleteRequest massDeleteRequest);

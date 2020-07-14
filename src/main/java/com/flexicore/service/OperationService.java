@@ -10,7 +10,7 @@ import com.flexicore.request.OperationFiltering;
 import com.flexicore.request.OperationUpdate;
 import com.flexicore.security.SecurityContext;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +31,7 @@ public interface OperationService extends FlexiCoreService {
 
     <T extends Baseclass> T getByIdOrNull(String id, Class<T> c, List<String> batchString, SecurityContext securityContext);
 
-    @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional
     void merge(Object o);
 
     boolean tennantAllowed(Operation operation, Tenant tenant);
@@ -56,10 +56,10 @@ public interface OperationService extends FlexiCoreService {
 
     void refrehEntityManager();
 
-    @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional
     void massMerge(List<?> toMerge);
 
-    @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional
     Operation createOperation(CreateOperationRequest createOperationRequest);
 
     Operation createOperationNoMerge(CreateOperationRequest createOperationRequest);

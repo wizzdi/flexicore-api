@@ -21,11 +21,6 @@ import javax.persistence.ManyToOne;
 
 public class UIComponent extends Baseclass {
 
-	static UIComponent s_Singleton=new UIComponent();
-	public  static UIComponent s() {return s_Singleton;}
-	static{
-		Baseclass.registerSingletone(s_Singleton);
-	}
 
 	public UIComponent() {
 	}
@@ -36,18 +31,6 @@ public class UIComponent extends Baseclass {
 
 	private String externalId;
 
-
-	@ManyToOne(targetEntity = UIContainer.class)
-	private UIContainer uiContainer;
-
-	@ManyToOne(targetEntity = UIContainer.class)
-	public UIContainer getUiContainer() {
-		return uiContainer;
-	}
-
-	public void setUiContainer(UIContainer uiContainer) {
-		this.uiContainer = uiContainer;
-	}
 
 	public String getExternalId() {
 		return externalId;

@@ -12,7 +12,7 @@ import com.flexicore.request.PermissionGroupsFilter;
 import com.flexicore.request.UpdatePermissionGroup;
 import com.flexicore.security.SecurityContext;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Set;
 
@@ -51,10 +51,10 @@ public interface PermissionGroupService extends FlexiCoreService {
      */
     PermissionGroup createPermissionGroup(CreatePermissionGroupRequest createPermissionGroupRequest, SecurityContext securityContext);
 
-    @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional
     void merge(Object base);
 
-    @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional
     void massMerge(List<?> toMerge);
 
     /**

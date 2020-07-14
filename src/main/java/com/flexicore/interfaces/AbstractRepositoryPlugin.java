@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Set;
@@ -94,7 +94,7 @@ public abstract class AbstractRepositoryPlugin implements PluginRepository, Exte
         return baseclassRepository.getAllComplexFields(c);
     }
 
-    @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional
     public void merge(Object base) {
         baseclassRepository.merge(base);
     }
@@ -275,22 +275,22 @@ public abstract class AbstractRepositoryPlugin implements PluginRepository, Exte
         baseclassRepository.refrehEntityManager();
     }
 
-    @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional
     public void massMerge(List<?> toMerge) {
         baseclassRepository.massMerge(toMerge);
     }
 
-    @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional
     public <T extends Baseclass> List<T> findByIds(Class<T> c, Set<String> requested) {
         return baseclassRepository.findByIds(c, requested);
     }
 
-    @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional
     public void merge(Object base, boolean updateUpdateDate) {
         baseclassRepository.merge(base, updateUpdateDate);
     }
 
-    @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional
     public void massMerge(List<?> toMerge, boolean updateUpdateDate) {
         baseclassRepository.massMerge(toMerge, updateUpdateDate);
     }

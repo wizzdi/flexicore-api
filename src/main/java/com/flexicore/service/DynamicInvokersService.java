@@ -13,7 +13,7 @@ import com.flexicore.response.ExecuteInvokersResponse;
 import com.flexicore.response.InvokerInfo;
 import com.flexicore.security.SecurityContext;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Set;
 
@@ -46,7 +46,7 @@ public interface DynamicInvokersService extends FlexiCoreService {
      */
     ExecuteInvokersResponse executeInvoker(ExecuteInvokerRequest executeInvokerRequest, SecurityContext securityContext);
 
-    @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional
     void massMerge(List<?> toMerge);
 
     /**
