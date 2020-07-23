@@ -9,7 +9,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InvokerMethodInfo {
 
@@ -18,6 +22,8 @@ public class InvokerMethodInfo {
     private String id;
     private String description;
     private String displayName;
+    private Set<String> categories;
+    private Set<String> relatedMethodNames;
     private String returnType;
     private String parameterHolderType;
     private List<ParameterInfo> parameters=new ArrayList<>();
@@ -29,6 +35,9 @@ public class InvokerMethodInfo {
         displayName=invokerMethodInfo!=null&&!invokerMethodInfo.displayName().isEmpty()?invokerMethodInfo.displayName():name;
         description=invokerMethodInfo!=null&&!invokerMethodInfo.description().isEmpty()?invokerMethodInfo.description():"No Description";
         returnType=method.getReturnType()!=null?method.getReturnType().getCanonicalName():null;
+        this.categories=invokerMethodInfo!=null? Stream.of(invokerMethodInfo.categories()).collect(Collectors.toSet()) : Collections.emptySet();
+        this.relatedMethodNames=invokerMethodInfo!=null? Stream.of(invokerMethodInfo.relatedMethodNames()).collect(Collectors.toSet()) : Collections.emptySet();
+
         Parameter[] parameters=method.getParameters();
         if(parameters.length>0){
             Parameter parameter=parameters[0];
@@ -118,5 +127,23 @@ public class InvokerMethodInfo {
     public InvokerMethodInfo setId(String id) {
         this.id = id;
         return this;
+    }
+
+    public Set<String> getCategories() {
+        return categories;
+    }
+
+    public <T extends InvokerMethodInfo> T setCategories(Set<String> categories) {
+        this.categories = categories;
+        return (T) this;
+    }
+
+    public Set<String> getRelatedMethodNames() {
+        return relatedMethodNames;
+    }
+
+    public <T extends InvokerMethodInfo> T setRelatedMethodNames(Set<String> relatedMethodNames) {
+        this.relatedMethodNames = relatedMethodNames;
+        return (T) this;
     }
 }

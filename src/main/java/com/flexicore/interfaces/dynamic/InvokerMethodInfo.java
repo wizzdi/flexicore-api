@@ -13,6 +13,8 @@ import java.lang.annotation.Target;
 public @interface InvokerMethodInfo {
     String displayName() default "";
     String description() default "";
+    String[] categories() default {};
+    String[] relatedMethodNames() default {};
     IOperation.Access access() default IOperation.Access.allow;
     Class<? extends Baseclass>[] relatedClasses() default {};
 

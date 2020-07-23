@@ -7,6 +7,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,8 @@ public class DynamicExecution extends Baseclass {
 
     @OneToOne(targetEntity = ExecutionParametersHolder.class)
     private ExecutionParametersHolder executionParametersHolder;
+    @Column(columnDefinition = "timestamp with time zone")
+    private OffsetDateTime lastExecuted;
 
 
     @OneToMany(targetEntity = ServiceCanonicalName.class,mappedBy = "dynamicExecution",fetch = FetchType.EAGER)
@@ -61,5 +64,14 @@ public class DynamicExecution extends Baseclass {
     public DynamicExecution setExecutionParametersHolder(ExecutionParametersHolder executionParametersHolder) {
         this.executionParametersHolder = executionParametersHolder;
         return this;
+    }
+
+    public OffsetDateTime getLastExecuted() {
+        return lastExecuted;
+    }
+
+    public <T extends DynamicExecution> T setLastExecuted(OffsetDateTime lastExecuted) {
+        this.lastExecuted = lastExecuted;
+        return (T) this;
     }
 }

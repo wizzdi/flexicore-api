@@ -66,11 +66,13 @@ public class FilteringInformationHolder extends ExecutionParametersHolder implem
 
     private String resultType;
 
-    @Transient
-    private Set<String> excludingIds = new HashSet<>();
+    @OneToMany(targetEntity = BaseclassNotIdFiltering.class, mappedBy = "filteringInformationHolder")
+    @FieldInfo(displayName = "excludingIds", description = "excluding specific ids")
+    private List<BaseclassNotIdFiltering> excludingIds = new ArrayList<>();
 
-    @Transient
-    private Set<String> onlyIds = new HashSet<>();
+    @OneToMany(targetEntity = BaseclassOnlyIdFiltering.class, mappedBy = "filteringInformationHolder")
+    @FieldInfo(displayName = "onlyIds", description = "specific ids")
+    private List<BaseclassOnlyIdFiltering> onlyIds = new ArrayList<>();
 
     @OneToMany(targetEntity = TenantIdFiltering.class, mappedBy = "filteringInformationHolder")
     @IdRefFieldInfo(displayName = "tenants", description = "tenants to filter by", refType = Tenant.class)
@@ -165,6 +167,16 @@ public class FilteringInformationHolder extends ExecutionParametersHolder implem
         if (clazzIds != null) {
             for (ClazzIdFiltering clazzIdFiltering : clazzIds) {
                 clazzIdFiltering.prepareForSave(this);
+            }
+        }
+        if (onlyIds != null) {
+            for (BaseclassOnlyIdFiltering baseclassOnlyIdFiltering : onlyIds) {
+                baseclassOnlyIdFiltering.prepareForSave(this);
+            }
+        }
+        if (excludingIds != null) {
+            for (BaseclassNotIdFiltering baseclassNotIdFiltering : excludingIds) {
+                baseclassNotIdFiltering.prepareForSave(this);
             }
         }
 
@@ -343,22 +355,22 @@ public class FilteringInformationHolder extends ExecutionParametersHolder implem
     }
 
 
-    @Transient
-    public Set<String> getExcludingIds() {
+    @OneToMany(targetEntity = BaseclassNotIdFiltering.class, mappedBy = "filteringInformationHolder")
+    public List<BaseclassNotIdFiltering> getExcludingIds() {
         return excludingIds;
     }
 
-    public <T extends FilteringInformationHolder> T setExcludingIds(Set<String> excludingIds) {
+    public <T extends FilteringInformationHolder> T setExcludingIds(List<BaseclassNotIdFiltering> excludingIds) {
         this.excludingIds = excludingIds;
         return (T) this;
     }
 
-    @Transient
-    public Set<String> getOnlyIds() {
+    @OneToMany(targetEntity = BaseclassOnlyIdFiltering.class, mappedBy = "filteringInformationHolder")
+    public List<BaseclassOnlyIdFiltering> getOnlyIds() {
         return onlyIds;
     }
 
-    public <T extends FilteringInformationHolder> T setOnlyIds(Set<String> onlyIds) {
+    public <T extends FilteringInformationHolder> T setOnlyIds(List<BaseclassOnlyIdFiltering> onlyIds) {
         this.onlyIds = onlyIds;
         return (T) this;
     }

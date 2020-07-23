@@ -80,6 +80,8 @@
 		<class>com.flexicore.request.OperationFiltering</class>
 		<class>com.flexicore.model.AccessRef</class>
 		<class>com.flexicore.model.DynamicInvokerRef</class>
+		<class>com.flexicore.model.BaseclassNotIdFiltering</class>
+		<class>com.flexicore.model.BaseclassOnlyIdFiltering</class>
 
 
 
