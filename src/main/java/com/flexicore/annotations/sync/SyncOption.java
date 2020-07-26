@@ -9,4 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 public @interface SyncOption {
     boolean continueSyncRecursionOnOneToMany() default false;
     boolean sync() default true;
+    int version() default 0;
+
 }

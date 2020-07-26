@@ -22,23 +22,9 @@ public class MongoConnectionService {
     public static final String MONGO_DB = "MongoDB";
     public static final String dbName = "flexicoreNoSQL";
 
-    @Autowired
-    private MongoDatabaseFactory mongoDbFactory;
-
     @Value("${spring.data.mongodb.uri:mongodb://localhost}")
     private String connectionString;
 
-    @Bean
-    public  MongoDatabaseFactory mongoDatabaseFactory() {
-        return new SimpleMongoClientDatabaseFactory(MongoClients.create(), dbName);
-    }
-
-    @Bean
-    public MappingMongoConverter getDefaultMongoConverter() throws Exception {
-        MappingMongoConverter converter = new MappingMongoConverter(
-                new DefaultDbRefResolver(mongoDbFactory), new MongoMappingContext());
-        return converter;
-    }
 
     @Bean
     public MongoClient produceMongoClient() {
