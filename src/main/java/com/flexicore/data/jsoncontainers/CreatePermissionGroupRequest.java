@@ -4,6 +4,7 @@ public class CreatePermissionGroupRequest {
 
     private String name;
     private String description;
+    private String externalId;
 
 
     public String getName() {
@@ -22,5 +23,14 @@ public class CreatePermissionGroupRequest {
     public CreatePermissionGroupRequest setDescription(String description) {
         this.description = description;
         return this;
+    }
+
+    public String getExternalId() {
+        return externalId;
+    }
+
+    public <T extends CreatePermissionGroupRequest> T setExternalId(String externalId) {
+        this.externalId = externalId;
+        return (T) this;
     }
 }

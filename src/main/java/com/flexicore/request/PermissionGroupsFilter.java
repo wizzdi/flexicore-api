@@ -16,6 +16,8 @@ public class PermissionGroupsFilter extends FilteringInformationHolder {
     @JsonIgnore
     private List<Baseclass> baseclasses;
 
+    private Set<String> externalIds;
+
 
 
     public Set<String> getBaseclassIds() {
@@ -34,6 +36,15 @@ public class PermissionGroupsFilter extends FilteringInformationHolder {
 
     public <T extends PermissionGroupsFilter> T setBaseclasses(List<Baseclass> baseclasses) {
         this.baseclasses = baseclasses;
+        return (T) this;
+    }
+
+    public Set<String> getExternalIds() {
+        return externalIds;
+    }
+
+    public <T extends PermissionGroupsFilter> T setExternalIds(Set<String> externalIds) {
+        this.externalIds = externalIds;
         return (T) this;
     }
 }

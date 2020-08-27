@@ -17,6 +17,7 @@ public class UIComponentRegistrationContainer {
 
     @Schema(required = true)
     private String externalId;
+    private String groups;
 
     public String getExternalId() {
         return externalId;
@@ -41,6 +42,15 @@ public class UIComponentRegistrationContainer {
 
     public <T extends UIComponentRegistrationContainer> T setDescription(String description) {
         this.description = description;
+        return (T) this;
+    }
+
+    public String getGroups() {
+        return groups;
+    }
+
+    public <T extends UIComponentRegistrationContainer> T setGroups(String groups) {
+        this.groups = groups;
         return (T) this;
     }
 }

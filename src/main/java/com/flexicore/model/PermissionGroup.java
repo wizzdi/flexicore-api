@@ -21,6 +21,8 @@ public class PermissionGroup extends Baseclass {
 	static PermissionGroup s_Singleton=new PermissionGroup();
 	public  static PermissionGroup s() {return s_Singleton;}
 
+	private String externalId;
+
 	public PermissionGroup() {
 	}
 
@@ -41,5 +43,14 @@ public class PermissionGroup extends Baseclass {
 	public PermissionGroup setLinks(List<PermissionGroupToBaseclass> permissionGroupToBaseclasses) {
 		this.links = permissionGroupToBaseclasses;
 		return this;
+	}
+
+	public String getExternalId() {
+		return externalId;
+	}
+
+	public <T extends PermissionGroup> T setExternalId(String externalId) {
+		this.externalId = externalId;
+		return (T) this;
 	}
 }
