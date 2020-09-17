@@ -110,6 +110,14 @@ public interface BaseclassNoSQLRepository extends PluginRepository {
 
     void massMergeBaseclassNoSQL(List<? extends BaseclassNoSQL> o);
 
+    <T extends BaseclassNoSQL> T getByIdOrNull(Class<T> c,String collectionName, String id);
+
+    <T extends BaseclassNoSQL> List<T> listByIds(Class<T> c,String collectionName, Set<String> ids);
+
+    void mergeBaseclassNoSQL(BaseclassNoSQL o,String collectionName);
+
+    void massMergeBaseclassNoSQL(List<? extends BaseclassNoSQL> o,String collectionName);
+
 
     void refreshEntityManager();
 
