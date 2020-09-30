@@ -14,9 +14,13 @@ public class BaselinkFilter extends FilteringInformationHolder {
     private Set<String> leftsideIds=new HashSet<>();
     @JsonIgnore
     private List<Baseclass> leftside;
+    private String leftsideTypeClassName;
+    private Class<? extends Baseclass> leftsideType;
     private Set<String> rightsideIds=new HashSet<>();
     @JsonIgnore
     private List<Baseclass> rightside;
+    private String rightsideTypeClassName;
+    private Class<? extends Baseclass> rightsideType;
     private String valueId;
     @JsonIgnore
     private Baseclass value;
@@ -43,6 +47,8 @@ public class BaselinkFilter extends FilteringInformationHolder {
         this.simpleValue = other.simpleValue;
         this.linkClassName = other.linkClassName;
         this.linkClass = other.linkClass;
+        this.rightsideType=other.getRightsideType();
+        this.leftsideType=other.getLeftsideType();
     }
 
     public Set<String> getLeftsideIds() {
@@ -124,6 +130,44 @@ public class BaselinkFilter extends FilteringInformationHolder {
 
     public <T extends BaselinkFilter> T setLinkClass(Class<? extends Baselink> linkClass) {
         this.linkClass = linkClass;
+        return (T) this;
+    }
+
+    @JsonIgnore
+    public Class<? extends Baseclass> getLeftsideType() {
+        return leftsideType;
+    }
+
+    public <T extends BaselinkFilter> T setLeftsideType(Class<? extends Baseclass> leftsideType) {
+        this.leftsideType = leftsideType;
+        return (T) this;
+    }
+
+    @JsonIgnore
+    public Class<? extends Baseclass> getRightsideType() {
+        return rightsideType;
+    }
+
+    public <T extends BaselinkFilter> T setRightsideType(Class<? extends Baseclass> rightsideType) {
+        this.rightsideType = rightsideType;
+        return (T) this;
+    }
+
+    public String getLeftsideTypeClassName() {
+        return leftsideTypeClassName;
+    }
+
+    public <T extends BaselinkFilter> T setLeftsideTypeClassName(String leftsideTypeClassName) {
+        this.leftsideTypeClassName = leftsideTypeClassName;
+        return (T) this;
+    }
+
+    public String getRightsideTypeClassName() {
+        return rightsideTypeClassName;
+    }
+
+    public <T extends BaselinkFilter> T setRightsideTypeClassName(String rightsideTypeClassName) {
+        this.rightsideTypeClassName = rightsideTypeClassName;
         return (T) this;
     }
 }

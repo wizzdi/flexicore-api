@@ -87,69 +87,9 @@ public class BaseclassListener extends DescriptorEventAdapter {
 
 
 
-    private void handleTextSearch(Baseclass b, DescriptorEvent descriptorEvent) {
-        try {
-            if (isFreeTextSupport(b.getClass())) {
-                String freeText= Stream.of( Introspector.getBeanInfo(b.getClass(), Object.class).getPropertyDescriptors()).filter(this::isPropertyForTextSearch).map(PropertyDescriptor::getReadMethod).filter(this::isIncludeMethod).map(f-> invoke(b, f)).filter(Objects::nonNull).map(f->f+"").filter(f->!f.isEmpty()).collect(Collectors.joining("|"));
-                b.setSearchKey(freeText);
-                descriptorEvent.getRecord().put(Baseclass_.searchKey.getName().toUpperCase(),freeText);
-                logger.fine("Free Text field for "+b.getId() +" is set");
-
-            }
-        }
-
-        catch (Exception e){
-            logger.log(Level.SEVERE,"unable to set free text field",e);
-        }
-    }
-
-    private boolean isPropertyForTextSearch(PropertyDescriptor f) {
-        return propertyTypes.contains(f.getPropertyType());
-    }
-
-    private static final Set<Class<?>> propertyTypes= Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-            String.class,
-            int.class,
-            double.class,
-            float.class,
-            int.class,
-            long.class,
-            short.class,
-            Double.class,
-            Float.class,
-            Integer.class,
-            Long.class,
-            Short.class
-
-    )));
 
 
-    private Object invoke(Baseclass b, Method f) {
-        try {
-            return f.invoke(b);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            logger.log(Level.SEVERE,"unable to invoke method",e);
-        }
-        return null;
-    }
 
-    private boolean isIncludeMethod(Method f) {
-        if(f==null||f.isAnnotationPresent(Transient.class)){
-            return false;
-        }
-        FullTextSearchOptions fullTextSearchOptions=f.getAnnotation(FullTextSearchOptions.class);
-
-        return fullTextSearchOptions==null||fullTextSearchOptions.include();
-    }
-
-    private boolean isFreeTextSupport(Class<? extends Baseclass> aClass) {
-        return freeTextSuportMap.computeIfAbsent(aClass.getCanonicalName(),f-> checkFreeTextSupport(aClass));
-    }
-
-    private boolean checkFreeTextSupport(Class<? extends Baseclass> aClass) {
-        FullTextSearch annotation = aClass.getAnnotation(FullTextSearch.class);
-        return annotation!=null&&annotation.supported();
-    }
 
     private void updateUpdateDate(OffsetDateTime now, Baseclass b,DescriptorEvent descriptorEvent) {
         /*if (!b.isDontUpdateUpdateDate()) {
@@ -179,7 +119,6 @@ public class BaseclassListener extends DescriptorEventAdapter {
             }
 
             OffsetDateTime now = DateUtils.millisFloor(OffsetDateTime.now());
-            handleTextSearch(b,descriptorEvent);
             if (b.getCreationDate() == null) {
                 b.setCreationDate(now);
                 descriptorEvent.getRecord().put(Baseclass_.creationDate.getName().toUpperCase(), now);
