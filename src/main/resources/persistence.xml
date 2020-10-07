@@ -42,7 +42,7 @@
 		<class>com.flexicore.model.BaseclassLongFiltering</class>
 		<class>com.flexicore.model.dynamic.ExecutionParametersHolder</class>
 		<class>com.flexicore.model.dynamic.DynamicInvoker</class>
-		<class>com.flexicore.model.TenantIdFiltering</class>
+		<class>com.flexicore.model.TenantIdFiltering</class>1
 		<class>com.flexicore.model.CurrentDatabaseTenant</class>
 		<class>com.flexicore.model.ClazzIdFiltering</class>
 		<class>com.flexicore.model.dynamic.DynamicExecution</class>
