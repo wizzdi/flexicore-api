@@ -33,13 +33,6 @@
 		<class>com.flexicore.model.TenantToUser</class>
 		<class>com.flexicore.model.User</class>
 		<class>com.flexicore.model.UserToBaseClass</class>
-		<class>com.flexicore.model.licensing.LicenseRequest</class>
-		<class>com.flexicore.model.licensing.LicensingEntity</class>
-		<class>com.flexicore.model.licensing.LicensingFeature</class>
-		<class>com.flexicore.model.licensing.LicensingProduct</class>
-		<class>com.flexicore.model.licensing.LicenseRequestToProduct</class>
-		<class>com.flexicore.model.licensing.LicenseRequestToFeature</class>
-		<class>com.flexicore.model.licensing.LicenseRequestToEntity</class>
 		<class>com.flexicore.model.TimedLink</class>
 		<class>com.flexicore.model.PermissionGroup</class>
 		<class>com.flexicore.model.PermissionGroupToBaseclass</class>
@@ -57,7 +50,6 @@
 
 		<class>com.flexicore.model.ZipFile</class>
 		<class>com.flexicore.model.ZipFileToFileResource</class>
-		<class>com.flexicore.model.licensing.LicenseRequestToQuantityFeature</class>
 		<class>com.flexicore.model.SecurityEntity</class>
 
 		<class>com.flexicore.model.Presenter</class>
