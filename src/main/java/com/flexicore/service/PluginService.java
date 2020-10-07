@@ -16,16 +16,19 @@ import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Logger;
 
+
 public interface PluginService extends FlexiCoreService {
     static Queue<ModuleManifest> externalModules=new ConcurrentLinkedQueue<>();
 
     /**
      * instantiates all plugin classes of type #pluginType
+     * @deprecated replaced by {@link org.pf4j.PluginManager}
      * @param pluginType interface or specific implementation of the required instance
      * @param requirements (optional) map used to set specific versions of the plugins (key should be the canonical class name)
      * @param orderObject (optional) job object containing info to order the resulting instances
      * @return collection of instantiated objects of extending/implementing pluginType
      */
+    @Deprecated
     Collection<?> getPlugins(Class<? extends Plugin> pluginType,
                              HashMap<String, PluginRequirement> requirements, Job orderObject);
 
@@ -42,24 +45,36 @@ public interface PluginService extends FlexiCoreService {
     Set<ModuleManifest> getPluginModuleListing();
 
     /**
+     * @deprecated replaced by {@link org.pf4j.PluginManager}
      * returns a list of loaded plugin classes
      * @return a list of objects describing the loaded plugin classes
      */
+    @Deprecated
     List<PluginInformationHolder> getAll();
 
     /**
+     * @deprecated not required
      * cleans instance ( should be called if {@link #getPlugins(Class, HashMap, Job)} was used to create the instance)
      * @param o instance to be cleaned
      * @return true if the cleanup was successful
      */
+    @Deprecated
     boolean cleanUpInstance(Object o);
 
+    /**
+     * @deprecated replace with {@link org.pf4j.PluginManager}
+     * @param type type of plugin
+     * @param reqs additional requirements
+     * @param <T> type
+     * @return instanciated plugin
+     */
+    @Deprecated
     <T> T instansiate(Class<T> type, Map<String, PluginRequirement> reqs);
     /**
      * reads manifest into structured #ModuleManifest Object
      * @param jar jar containing the manifest
      * @param logger logger used to log status
-     * @return
+     * @return module manifest
      */
     ModuleManifest readModule(File jar, Logger logger);
 
