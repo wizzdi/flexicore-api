@@ -152,8 +152,6 @@ public interface BaseclassRepository {
     <T extends Baseclass> void addClazzPredicate(List<Predicate> existingPredicates, From<?, T> r,
                                                  CriteriaBuilder cb, Set<String> clazzIds);
 
-    <T extends Baseclass> void addCategoriesPredicate(List<Predicate> existingPredicates, From<?, T> r,
-                                                      CriteriaBuilder cb, List<CategoryIdFiltering> categories);
 
     void addTenantToBaseClass(Baseclass b, Tenant tenant, SecurityContext securityContext);
 

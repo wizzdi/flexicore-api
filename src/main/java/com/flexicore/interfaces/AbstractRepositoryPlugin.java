@@ -247,10 +247,6 @@ public abstract class AbstractRepositoryPlugin implements PluginRepository, Exte
         baseclassRepository.addClazzPredicate(existingPredicates, r, cb, clazzIds);
     }
 
-    public <T extends Baseclass> void addCategoriesPredicate(List<Predicate> existingPredicates, From<?, T> r, CriteriaBuilder cb, List<CategoryIdFiltering> categories) {
-        baseclassRepository.addCategoriesPredicate(existingPredicates, r, cb, categories);
-    }
-
     public void addTenantToBaseClass(Baseclass b, Tenant tenant, SecurityContext securityContext) {
         baseclassRepository.addTenantToBaseClass(b, tenant, securityContext);
     }

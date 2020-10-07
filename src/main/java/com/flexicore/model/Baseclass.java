@@ -161,14 +161,6 @@ public class Baseclass implements Serializable, Syncable {
     private List<PermissionGroupToBaseclass> permissionGroupToBaseclasses = new ArrayList<>();
 
 
-    @JsonIgnore
-    //@JsonIdentityReference(alwaysAsId = true)
-    @OneToMany(targetEntity = CategoryToBaseClass.class, mappedBy = "rightside")
-
-    private List<CategoryToBaseClass> categories = new ArrayList<>();
-
-
-
     public OffsetDateTime getCreationDate() {
         return creationDate;
     }
@@ -468,23 +460,6 @@ public class Baseclass implements Serializable, Syncable {
         this.updateDate = updateDate;
     }
 
-
-    public boolean addCategory(CategoryToBaseClass categoryToBaseClass) {
-        return categories.add(categoryToBaseClass);
-    }
-
-
-    @JsonIgnore
-    @OneToMany(targetEntity = CategoryToBaseClass.class, mappedBy = "rightside")
-
-    public List<CategoryToBaseClass> getCategories() {
-        return categories;
-    }
-
-
-    public void setCategories(List<CategoryToBaseClass> categories) {
-        this.categories = categories;
-    }
 
     public static List<Clazz> getAllClazz() {
         return new ArrayList<>(allclazzes.values());

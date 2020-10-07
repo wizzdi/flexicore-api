@@ -13,349 +13,60 @@ import java.util.Map;
 import com.flexicore.security.SecurityContext;
 
 
-public class QueryInformationHolder<T extends Baseclass> {
+public class QueryInformationHolder<E extends Baseclass> {
 	
-	
-	private int pageSize;
-	private int currentPage;
-	private Class<T> type;
+
+	private Class<E> type;
 	private List<String> batchFetchString; //hints for preventing n+1
 	private SecurityContext securityContext;
 	private FilteringInformationHolder filteringInformationHolder;
-	private HashMap<String, Object> additionalOptions = new HashMap<>();
-	
 
-	public QueryInformationHolder() {
-		
-		filteringInformationHolder= new FilteringInformationHolder();
-		
+
+	public QueryInformationHolder(Class<E> type,SecurityContext securityContext) {
+		this(new FilteringInformationHolder(),type,securityContext);
 	}
-	
-	
 
 
-
-	
-
-
-
-
-
-	public QueryInformationHolder(Class<T> type,SecurityContext securityContext) {
-		this();
+	public QueryInformationHolder(FilteringInformationHolder filteringInformationHolder,Class<E> type,SecurityContext securityContext) {
 		this.type = type;
-		this.setSecurityContext(securityContext);
+		this.securityContext=securityContext;
+		this.filteringInformationHolder=filteringInformationHolder;
 	}
 
 
-
-
-
-
-
-
-
-
-
-	public QueryInformationHolder(FilteringInformationHolder filteringInformationHolder,Class<T> type,SecurityContext securityContext) {
-		this(type,securityContext);
-		this.setFilteringInformationHolder(filteringInformationHolder);
-		this.pageSize = filteringInformationHolder.getPageSize()!=null?filteringInformationHolder.getPageSize():-1;
-		this.currentPage = filteringInformationHolder.getCurrentPage()!=null?filteringInformationHolder.getCurrentPage():-1;
-
-	}
-
-
-
-
-
-
-	public QueryInformationHolder(FilteringInformationHolder filteringInformationHolder,int pageSize,int currentPage,Class<T> type,SecurityContext securityContext) {
-		this(type,securityContext);
-		this.setFilteringInformationHolder(filteringInformationHolder);
-		this.pageSize = filteringInformationHolder.getPageSize()!=null?filteringInformationHolder.getPageSize():pageSize;
-		this.currentPage = filteringInformationHolder.getCurrentPage()!=null?filteringInformationHolder.getCurrentPage():currentPage;
-		
-	}
-
-
-
-
-	public QueryInformationHolder( List<CategoryIdFiltering> categories,
-			List<SortParameter> sort, int pageSize, int currentPage, Class<T> type,SecurityContext securityContext) {
-		this(type,securityContext);
-		setFilteringInformationHolder(new FilteringInformationHolder(sort, categories));
-		this.pageSize = pageSize;
-		this.currentPage = currentPage;
-	}
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
-
-
-
-
-
-
-
-
-
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
-
-
-
-
-
-
-
-
-
-
-
-	public int getCurrentPage() {
-		return currentPage;
-	}
-
-
-
-
-
-
-
-
-
-
-
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
-
-
-
-
-
-
-
-
-
-
-
-	public Class<T> getType() {
+	public Class<E> getType() {
 		return type;
 	}
 
-
-
-
-
-
-
-
-
-
-
-	public void setType(Class<T> type) {
+	public <T extends QueryInformationHolder<E>> T setType(Class<E> type) {
 		this.type = type;
+		return (T) this;
 	}
-
-
-
-
-
-
-
-
-
-
 
 	public List<String> getBatchFetchString() {
 		return batchFetchString;
 	}
 
-
-
-
-
-
-
-
-
-
-
-	public void setBatchFetchString(List<String> batchFetchString) {
+	public <T extends QueryInformationHolder<E>> T setBatchFetchString(List<String> batchFetchString) {
 		this.batchFetchString = batchFetchString;
+		return (T) this;
 	}
-
-
-
-
-
-
-
-
-
-
 
 	public SecurityContext getSecurityContext() {
 		return securityContext;
 	}
 
-
-
-
-
-
-
-
-
-
-
-	public void setSecurityContext(SecurityContext securityContext) {
+	public <T extends QueryInformationHolder<E>> T setSecurityContext(SecurityContext securityContext) {
 		this.securityContext = securityContext;
+		return (T) this;
 	}
-
-
-
-
-
-
-
-
-
-
 
 	public FilteringInformationHolder getFilteringInformationHolder() {
 		return filteringInformationHolder;
 	}
 
-
-
-
-
-
-
-
-
-
-
-	public void setFilteringInformationHolder(FilteringInformationHolder filteringInformationHolder) {
+	public <T extends QueryInformationHolder<E>> T setFilteringInformationHolder(FilteringInformationHolder filteringInformationHolder) {
 		this.filteringInformationHolder = filteringInformationHolder;
+		return (T) this;
 	}
-
-
-
-
-
-
-
-
-
-
-
-	public Object get(Object key) {
-		return additionalOptions.get(key);
-	}
-
-
-
-
-
-
-
-
-
-
-
-	public Object put(String key, Object value) {
-		return additionalOptions.put(key, value);
-	}
-
-
-
-
-
-
-
-
-
-
-
-	public void putAll(Map<? extends String, ?> m) {
-		additionalOptions.putAll(m);
-	}
-
-
-
-
-
-
-
-
-
-
-
-	public Object remove(Object key) {
-		return additionalOptions.remove(key);
-	}
-
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
 }

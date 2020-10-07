@@ -38,9 +38,6 @@ public class FilteringInformationHolder extends ExecutionParametersHolder implem
      *
      */
     private static final long serialVersionUID = 839603578576323956L;
-    @OneToMany(targetEntity = CategoryIdFiltering.class, mappedBy = "filteringInformationHolder")
-    @IdRefFieldInfo(displayName = "categories", description = "categories to filter by", refType = Category.class)
-    private List<CategoryIdFiltering> categories = new ArrayList<>();
     @OneToMany(targetEntity = SortParameter.class, mappedBy = "filteringInformationHolder")
     @ListFieldInfo(displayName = "sort", description = "list of sorting options", listType = SortParameter.class)
     private List<SortParameter> sort = new ArrayList<>();
@@ -128,7 +125,6 @@ public class FilteringInformationHolder extends ExecutionParametersHolder implem
     }
 
     public FilteringInformationHolder(FilteringInformationHolder other) {
-        this.categories = other.categories;
         this.sort = other.sort;
         this.nameLike = other.nameLike;
         this.fullTextLike = other.fullTextLike;
@@ -149,11 +145,6 @@ public class FilteringInformationHolder extends ExecutionParametersHolder implem
 
     public void prepareForSave() {
         super.prepareForSave();
-        if (categories != null) {
-            for (CategoryIdFiltering category : categories) {
-                category.prepareForSave(this);
-            }
-        }
         if (sort != null) {
             for (SortParameter sortParameter : sort) {
                 sortParameter.prepareForSave(this);
@@ -191,10 +182,6 @@ public class FilteringInformationHolder extends ExecutionParametersHolder implem
         }
     }
 
-    public FilteringInformationHolder(List<SortParameter> sort, List<CategoryIdFiltering> categories) {
-        this(sort);
-        this.categories = categories;
-    }
 
 
     @Schema(description = "provides sorting information for the returned collection" +
@@ -211,18 +198,6 @@ public class FilteringInformationHolder extends ExecutionParametersHolder implem
         this.sort = sort;
     }
 
-    @Schema(description = "Filter out by Categories, optional " +
-            "list of Id values of categories associated with all of the retrieved data members" +
-            "You should retrieve a list of categories available for this clazz, see categories.")
-    @OneToMany(targetEntity = CategoryIdFiltering.class, mappedBy = "filteringInformationHolder")
-    public List<CategoryIdFiltering> getCategories() {
-
-        return categories;
-    }
-
-    public void setCategories(List<CategoryIdFiltering> categories) {
-        this.categories = categories;
-    }
 
 
     @Schema(description = "provide filtering on name, for example: %myname% will retrieve all instances having myname anywhere inside their name ", example = "%John Smith%")

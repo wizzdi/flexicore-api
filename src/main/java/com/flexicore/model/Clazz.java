@@ -28,8 +28,6 @@ import java.util.List;
     @JsonSubTypes.Type(value=ClazzLink.class, name="ClazzLink")
 })
 public class Clazz extends Baseclass {
-	static Clazz s_Singleton=new Clazz();
-	public  static Clazz s() {return s_Singleton;}
 
 	public Clazz() {
 	}
@@ -38,21 +36,6 @@ public class Clazz extends Baseclass {
 		super(name, securityContext);
 	}
 
-	@JsonIgnore
-	@OneToMany(targetEntity = CategoryToClazz.class,mappedBy="rightside",fetch=FetchType.LAZY)
-	private List<CategoryToClazz> CategoriesToClazz=new ArrayList<>();
-
-
-	
-	@JsonIgnore
-	@OneToMany(targetEntity = CategoryToClazz.class,mappedBy="rightside",fetch=FetchType.LAZY)
-	public List<CategoryToClazz> getCategoriesToClazz() {
-		return CategoriesToClazz;
-	}
-
-	public void setCategoriesToClazz(List<CategoryToClazz> categoriesToClazz) {
-		CategoriesToClazz = categoriesToClazz;
-	}
 
 
 

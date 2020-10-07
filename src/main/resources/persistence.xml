@@ -16,9 +16,6 @@
 		<!-- <jta-data-source>java:jboss/datasources/flexicoreDSMYSQL</jta-data-source> -->
 		<class>com.flexicore.model.Baseclass</class>
 		<class>com.flexicore.model.Baselink</class>
-		<class>com.flexicore.model.Category</class>
-		<class>com.flexicore.model.CategoryToBaseClass</class>
-		<class>com.flexicore.model.CategoryToClazz</class>
 		<class>com.flexicore.model.Clazz</class>
 		<class>com.flexicore.model.ClazzLink</class>
 		<class>com.flexicore.model.DocumentationTag</class>
@@ -49,7 +46,6 @@
 		<class>com.flexicore.model.SecurityWildcard</class>
 		<class>com.flexicore.model.FilteringInformationHolder</class>
 		<class>com.flexicore.model.SortParameter</class>
-		<class>com.flexicore.model.CategoryIdFiltering</class>
 		<class>com.flexicore.model.BaseclassLongFiltering</class>
 		<class>com.flexicore.model.dynamic.ExecutionParametersHolder</class>
 		<class>com.flexicore.model.dynamic.DynamicInvoker</class>
