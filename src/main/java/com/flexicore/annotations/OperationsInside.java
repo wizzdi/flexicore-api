@@ -25,7 +25,4 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({TYPE})
 @Inherited
 public @interface OperationsInside {
-    HasFeature[] features() default {};
-
-	
 }

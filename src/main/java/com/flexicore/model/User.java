@@ -38,7 +38,6 @@ import static com.flexicore.constants.Constants.systemAdminId;
 @Entity
 @Schema( description = "The basic entity for controlling access to system functions and objects")
 @FullTextSearch(supported = true)
-@HasFeature(productCanonicalName = "com.flexicore")
 public class User extends SecurityEntity {
     static User s_Singleton = new User();
     public static User s() { return s_Singleton; }

@@ -37,6 +37,4 @@ public @interface IOperation {
 		
 	}
 	Access access() default Access.allow;
-	HasFeature[] features() default {};
-	boolean noOtherLicenseRequired() default false;
 }
