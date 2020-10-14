@@ -6,18 +6,13 @@
  ******************************************************************************/
 package com.flexicore.model;
 
-import java.util.HashMap;
-
-import javax.persistence.*;
-
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.flexicore.annotations.AnnotatedClazz;
-import com.flexicore.annotations.FieldForView;
-import com.flexicore.data.jsoncontainers.Views;
 import com.flexicore.security.SecurityContext;
+
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 
 /**
@@ -35,18 +30,17 @@ import com.flexicore.security.SecurityContext;
         @Index(name = "baselink_cvalue_idx", columnList = "leftside_id,rightside_id,value_id"),
         @Index(name = "baselink_cvaluef_idx", columnList = "leftside_id,rightside_id,value_id,simplevalue")})
 @Entity
-
-
 public class Baselink extends Baseclass {
 
-    @FieldForView
+
+    @ManyToOne(targetEntity = Baseclass.class)
     protected Baseclass rightside;
-    @FieldForView
+    @ManyToOne(targetEntity = Baseclass.class)
     protected Baseclass leftside;
 
-    @FieldForView
     private String simplevalue;
-    @FieldForView
+
+    @ManyToOne(targetEntity = Baseclass.class)
     protected Baseclass value;
 
     public Baselink() {
@@ -57,13 +51,6 @@ public class Baselink extends Baseclass {
         super(name, securityContext);
     }
 
-    @Deprecated
-    public Baselink(Baseclass left, Baseclass right) {
-        super();
-        this.Init();
-        this.setLeftside(left);
-        this.setRightside(right);
-    }
 
     @ManyToOne(targetEntity = Baseclass.class)
     public Baseclass getRightside() {
@@ -101,12 +88,6 @@ public class Baselink extends Baseclass {
         this.value = value;
     }
 
-    @Deprecated
-    public void Init(Baseclass left, Baseclass right) {
-        super.Init();
-        this.setLeftside(left);
-        this.setRightside(right);
-    }
 
 
 }

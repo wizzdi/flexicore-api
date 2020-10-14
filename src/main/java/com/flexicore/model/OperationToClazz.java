@@ -19,8 +19,8 @@ import com.flexicore.security.SecurityContext;
 @Entity
 
 public class OperationToClazz extends Baselink {
-	private static OperationToClazz s_Singleton=new OperationToClazz();
-	public  static OperationToClazz s() {return s_Singleton;}
+
+
 
 	public OperationToClazz() {
 	}

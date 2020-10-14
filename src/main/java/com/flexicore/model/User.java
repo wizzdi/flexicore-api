@@ -8,26 +8,17 @@ package com.flexicore.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.flexicore.annotations.*;
-import com.flexicore.constants.Constants;
+import com.flexicore.annotations.AnnotatedClazz;
+import com.flexicore.annotations.FullTextSearch;
+import com.flexicore.annotations.FullTextSearchOptions;
 import com.flexicore.data.jsoncontainers.Views;
-import com.flexicore.security.NewUser;
 import com.flexicore.security.SecurityContext;
-import com.flexicore.service.PasswordGenerator;
-import com.lambdaworks.crypto.SCryptUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.apache.commons.io.FileUtils;
 
 import javax.persistence.*;
-import java.io.File;
-import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.flexicore.constants.Constants.systemAdminId;
-
-//import io.swagger.annotations.ApiModel;
 
 //the table name 'user' isn't allowed in Postgresql
 @SuppressWarnings("serial")
@@ -39,13 +30,9 @@ import static com.flexicore.constants.Constants.systemAdminId;
 @Schema( description = "The basic entity for controlling access to system functions and objects")
 @FullTextSearch(supported = true)
 public class User extends SecurityEntity {
-    static User s_Singleton = new User();
-    public static User s() { return s_Singleton; }
 
-    @FieldForView(group = "General", validation = "^(.+)@(.+)$")
     private String email;
     private String homeDir;
-    @FieldForView(group = "General")
     private String surName;
 
     private boolean disabled;
@@ -56,7 +43,6 @@ public class User extends SecurityEntity {
 
     @Lob
     private String uiConfiguration;
-
 
     @JsonIgnore
     private String forgotPasswordToken;
@@ -72,21 +58,13 @@ public class User extends SecurityEntity {
     @Column(columnDefinition = "timestamp with time zone")
     private OffsetDateTime lastVerificationDate;
 
-    protected static Clazz sclazz = null;
-//	@OneToMany(mappedBy = "rightside", fetch = FetchType.LAZY)
-//	private List<TenantToUser> tenants=new ArrayList<>();
-//	
-//
-//	public List<TenantToUser> getTenants() {
-//		return tenants;
-//	}
 
     @JsonIgnore
-    @FieldForView
+
     @OneToMany(targetEntity = RoleToUser.class,mappedBy = "rightside", fetch = FetchType.LAZY) //users are subscribed to very few roles.
     private List<RoleToUser> roles = new ArrayList<>();
 
-    @FieldForView
+
     @OneToMany(targetEntity = TenantToUser.class,mappedBy = "rightside")
     @JsonIgnore
     //users are subscribed to very few roles.
@@ -94,7 +72,7 @@ public class User extends SecurityEntity {
 
 
     @JsonIgnore
-    @FieldForView
+
     @OneToMany(targetEntity = UserToBaseClass.class,mappedBy = "leftside", fetch = FetchType.LAZY)
     private List<UserToBaseClass> userToBaseClasses = new ArrayList<>();
 
@@ -110,11 +88,8 @@ public class User extends SecurityEntity {
         this.roles = roleToUser;
     }
 
-    //@NotNull
-    @FieldForView(group = "General")
     @Column(name = "phone_number")
     private String phoneNumber;
-    @FieldForView(group = "Security", validation = "^(?!\\s*$).+")
     @JsonView(Views.Full.class)
     private String password;
 
@@ -128,27 +103,6 @@ public class User extends SecurityEntity {
 
     public User(String name, SecurityContext securityContext) {
         super(name, securityContext);
-        setHomeDir(Constants.USERS_ROOT_DIRECTORY + getName() + getId());
-    }
-
-    @Override
-    public void Init() {
-        super.Init();
-        setHomeDir(Constants.USERS_ROOT_DIRECTORY + getName() + getId());
-
-    }
-
-    @Deprecated
-    public void Init(NewUser newUser) {
-        this.Init();
-        setPassword(SCryptUtil.scrypt(newUser.getPassword(), scryptN, scryptR, scryptP));
-        setPhoneNumber(newUser.getPhonenumber());
-        setEmail(newUser.getEmail());
-        setSurName(newUser.getSurname());
-    }
-
-    public User(boolean noid) {
-
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -181,85 +135,6 @@ public class User extends SecurityEntity {
         this.password = password;
     }
 
-    public static final int scryptN = 16384;
-    public static final int scryptR = 8;
-    public static final int scryptP = 1;
-
-    @Transient
-    public void setdecryptedPassword(String password) {
-        this.password = SCryptUtil.scrypt(password, scryptN, scryptR, scryptP);
-    }
-
-    @Override
-    public void setParameter1(Object parameter1) {
-        super.setParameter1(parameter1);
-        this.setEmail(parameter1.toString());
-
-    }
-
-    @Override
-    public void setParameter2(Object parameter2) {
-
-        super.setParameter2(parameter2);
-        if (password == null) {
-            String passInFile=readFromFirstRunFile();
-            if(passInFile==null){
-                String pass = PasswordGenerator.generateRandom(8);
-                this.setdecryptedPassword(pass);
-                writeToFirstRunFile(pass);
-            }
-            else{
-                this.setdecryptedPassword(passInFile);
-
-            }
-        }
-
-    }
-
-    private static String readFromFirstRunFile() {
-        File file = new File(Constants.FIRST_RUN_FILE);
-        if (!file.getParentFile().exists()) {
-            if (!file.getParentFile().mkdirs()) {
-                System.out.println("cannot create first run file parent dir");
-            }
-
-        }
-        List<String> lines =null;
-        try {
-            lines =FileUtils.readLines(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lines!=null && !lines.isEmpty()?lines.get(0).trim():null;
-
-    }
-
-    private static void writeToFirstRunFile(String pass) {
-        File file = new File(Constants.FIRST_RUN_FILE);
-        if (!file.getParentFile().exists()) {
-            if (!file.getParentFile().mkdirs()) {
-                System.out.println("cannot create first run file parent dir");
-            }
-
-        }
-        List<String> lines = new ArrayList<>();
-        lines.add(pass);
-        try {
-            FileUtils.writeLines(file, lines);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void setParameter3(Object parameter3) {
-        if (parameter3 instanceof Tenant) {
-            super.setParameter3(parameter3);
-            setTenant((Tenant) parameter3);
-        }
-
-    }
-
     @FullTextSearchOptions(include = false)
     public String getHomeDir() {
         return homeDir;
@@ -278,10 +153,9 @@ public class User extends SecurityEntity {
     }
 
 
-    @FieldForView
+
     @OneToMany(targetEntity = TenantToUser.class,mappedBy = "rightside", fetch = FetchType.EAGER)
     @JsonIgnore
-    //users are subscribed to very few roles.
     public List<TenantToUser> getTenantToUsers() {
         return tenantToUsers;
     }
@@ -292,7 +166,7 @@ public class User extends SecurityEntity {
 
 
     @JsonIgnore
-    @FieldForView
+
     @OneToMany(targetEntity = UserToBaseClass.class,mappedBy = "securityEntity", fetch = FetchType.LAZY)
     public List<UserToBaseClass> getUserToBaseClasses() {
         return userToBaseClasses;

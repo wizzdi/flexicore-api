@@ -24,15 +24,7 @@ import com.flexicore.security.SecurityContext;
 
 
 
-public class OperationCategory extends Baseclass implements Serializable {
-
-	static OperationCategory s_Singleton = new OperationCategory();
-
-	public static OperationCategory s() {
-		return s_Singleton;
-	}
-
-	private static final long serialVersionUID = 1L;
+public class OperationCategory extends Baseclass  {
 
 	public OperationCategory() {
 		super();

@@ -6,20 +6,16 @@
  ******************************************************************************/
 package com.flexicore.model;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Properties;
-
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.flexicore.annotations.AnnotatedClazz;
-import com.flexicore.data.jsoncontainers.Views;
-import com.flexicore.enums.ExecutionPolicy;
 import com.flexicore.interfaces.ProccessPlugin;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Properties;
 
 @AnnotatedClazz(Category = "JobInformation", Name = "JobInformation", Description = "holds jobs information")
 
@@ -32,12 +28,9 @@ public class JobInformation {
     private Class<? extends ProccessPlugin> handler;
     private Serializable jobInfo;
     private boolean handle;
-    private HashMap<String, PluginRequirement> requirments = new HashMap<>();
     private Result previousPhaseResult;
     private Result currrentPhaseResult;
     private boolean mergeWithOthers;
-    private ExecutionPolicy executionPolicy = ExecutionPolicy.First;
-
     private Properties jobProperties;
 
 
@@ -103,16 +96,6 @@ public class JobInformation {
     }
 
 
-    @JsonIgnore
-    public ExecutionPolicy getExecutionPolicy() {
-        return executionPolicy;
-    }
-
-
-    public void setExecutionPolicy(ExecutionPolicy executionPolicy) {
-        this.executionPolicy = executionPolicy;
-    }
-
 
     public Result getCurrrentPhaseResult() {
         return currrentPhaseResult;
@@ -138,26 +121,13 @@ public class JobInformation {
     }
 
 
-    @JsonIgnore
-    public HashMap<String, PluginRequirement> getRequirments() {
-        return requirments;
-    }
-
-
-    public void setRequirments(HashMap<String, PluginRequirement> requirments) {
-        this.requirments = requirments;
-    }
-
-
     @Override
     public String toString() {
         return "JobInformation [" + (handler != null ? "handler=" + handler + ", " : "")
                 + (jobInfo != null ? "jobInfo=" + jobInfo + ", " : "") + "handle=" + handle + ", "
-                + (requirments != null ? "requirments=" + requirments + ", " : "")
                 + (previousPhaseResult != null ? "previousPhaseResult=" + previousPhaseResult + ", " : "")
                 + (currrentPhaseResult != null ? "currrentPhaseResult=" + currrentPhaseResult + ", " : "")
                 + "mergeWithOthers=" + mergeWithOthers + ", "
-                + (executionPolicy != null ? "executionPolicy=" + executionPolicy + ", " : "")
                 + (jobProperties != null ? "jobProperties=" + jobProperties : "") + "]";
     }
 

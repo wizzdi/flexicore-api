@@ -10,7 +10,7 @@ import com.flexicore.model.Job;
 
 import java.util.logging.Logger;
 
-public interface ProccessPlugin extends InitPlugin {
+public interface ProccessPlugin extends Plugin {
 	void process(Job job);
 
 	

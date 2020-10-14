@@ -20,8 +20,8 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 public class ClazzLink extends Clazz {
-	static ClazzLink s_Singleton=new ClazzLink();
-	public  static ClazzLink s() {return s_Singleton;}
+
+
 
 	public ClazzLink() {
 	}

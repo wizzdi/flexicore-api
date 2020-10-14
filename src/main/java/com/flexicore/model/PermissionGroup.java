@@ -18,8 +18,8 @@ import java.util.List;
 @SuppressWarnings("serial")
 @Entity
 public class PermissionGroup extends Baseclass {
-	static PermissionGroup s_Singleton=new PermissionGroup();
-	public  static PermissionGroup s() {return s_Singleton;}
+
+
 
 	private String externalId;
 

@@ -14,8 +14,6 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.flexicore.converters.CustomOffsetDateTimeSerializer;
 import com.flexicore.data.jsoncontainers.Views.Unrefined;
-import com.flexicore.interfaces.FlexiCoreClassLoader;
-
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 import java.time.OffsetDateTime;
@@ -86,11 +84,7 @@ public class ObjectMapperContextResolver implements ContextResolver<ObjectMapper
 
     @Override
     public ObjectMapper getContext(Class<?> type) {
-        if (type.getClassLoader() instanceof FlexiCoreClassLoader) {
-            return classLoaderObjectMapperMap.computeIfAbsent(type.getClassLoader(), f -> createClassLoaderObjectMapper(f));
-        } else {
             return defaultMapper;
-        }
     }
 
 

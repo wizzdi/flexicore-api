@@ -13,7 +13,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 
 @Schema(description = "Used to log into the system")
-public class AuthenticationRequestHolder implements Serializable {
+public class AuthenticationRequestHolder  {
     /**
      *
      */

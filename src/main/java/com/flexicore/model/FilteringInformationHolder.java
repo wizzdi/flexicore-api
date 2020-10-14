@@ -31,7 +31,7 @@ import java.util.*;
  */
 @Entity
 @Schema(description = "This class is used to filter a list. There are many extenders of this class adding information pertinent to some class, for example the EquipmentShort class has an extender that includes additional information such as location area on the map, street etc.")
-public class FilteringInformationHolder extends ExecutionParametersHolder implements Serializable {
+public class FilteringInformationHolder extends ExecutionParametersHolder  {
 
 
     /**

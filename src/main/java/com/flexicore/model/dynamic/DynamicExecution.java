@@ -13,8 +13,8 @@ import java.util.List;
 
 @Entity
 public class DynamicExecution extends Baseclass {
-    private static DynamicExecution s_Singleton=new DynamicExecution();
-    public  static DynamicExecution s() {return s_Singleton;}
+
+
 
     public DynamicExecution() {
     }

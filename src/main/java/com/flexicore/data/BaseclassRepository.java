@@ -1,7 +1,6 @@
 package com.flexicore.data;
 
 import com.flexicore.annotations.InheritedComponent;
-import com.flexicore.data.jsoncontainers.BaseclassCreationContainer;
 import com.flexicore.model.*;
 import com.flexicore.request.BaseclassCountRequest;
 import com.flexicore.request.MassDeleteRequest;
@@ -19,7 +18,7 @@ import java.util.Set;
 
 @InheritedComponent
 public interface BaseclassRepository {
-    @SuppressWarnings("unchecked")
+
     <T extends Baseclass> T findById(String id);
 
     <T> T findById(Class<T> type, String id);
@@ -160,9 +159,6 @@ public interface BaseclassRepository {
     EntityManager getEm();
 
     void setEm(EntityManager em);
-
-    <T extends Baseclass> T createBaseclass(BaseclassCreationContainer container,
-                                            SecurityContext securityContext);
 
     void refrehEntityManager();
 

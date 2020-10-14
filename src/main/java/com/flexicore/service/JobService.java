@@ -3,7 +3,6 @@ package com.flexicore.service;
 import com.flexicore.interfaces.FlexiCoreService;
 import com.flexicore.interfaces.ProccessPlugin;
 import com.flexicore.model.Job;
-import com.flexicore.model.PluginRequirement;
 import com.flexicore.request.RegisterForJobUpdates;
 import com.flexicore.security.SecurityContext;
 
@@ -25,8 +24,9 @@ public interface JobService extends FlexiCoreService {
     static void unregisterSession(Session session) {
         sessionMap.remove(session.getId());
     }
+    @Deprecated
     Job startJob(Serializable content, Class<? extends ProccessPlugin> type,
-                        Properties jobprops, HashMap<String, PluginRequirement> requriments, SecurityContext securityContext);
+                        Properties jobprops, HashMap<String, Object> requriments, SecurityContext securityContext);
     void startJob(Job job, SecurityContext securityContext);
     void setJobDefualts(Job job);
     boolean checkJobValidity(Job job);

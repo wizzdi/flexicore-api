@@ -18,9 +18,9 @@ import java.util.List;
 
 
 @AnnotatedClazz(Category="SecurityContext", Name="SecurityContext", Description="holds Context Information")
-public class SecurityContext implements Serializable {
-	private static SecurityContext s_Singleton=new SecurityContext();
-	public  static SecurityContext s() {return s_Singleton;}
+public class SecurityContext  {
+
+
 	private List<Tenant> tenants;
 	private User user;
 	private Operation operation;

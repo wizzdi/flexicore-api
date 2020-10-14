@@ -7,7 +7,6 @@
 package com.flexicore.model;
 
 import com.flexicore.annotations.AnnotatedClazz;
-import com.flexicore.annotations.AutoLink;
 import com.flexicore.annotations.IOperation;
 import com.flexicore.annotations.IOperation.Access;
 import com.flexicore.model.dynamic.DynamicInvoker;
@@ -15,7 +14,6 @@ import com.flexicore.security.SecurityContext;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import java.io.Serializable;
 
 /**
  * Entity implementation class for Entity: Operation
@@ -23,16 +21,9 @@ import java.io.Serializable;
  */
 @SuppressWarnings("serial")
 @AnnotatedClazz(Category = "access control", Name = "Operation", Description = "Defines an operation that can be blocked or allowed")
-@AutoLink(Name = {"linkwithadminrole"}, LinkClassName = {"com.flexicore.model.RoleToBaseclass"}, value = {"true"}, LeftID = {"HzFnw-nVR0Olq6WBvwKcQg"}, RightID = {""})
-//@Cache(type = CacheType.FULL)
 @Entity
 
-public class Operation extends Baseclass implements Serializable {
-    static Operation s_Singleton = new Operation();
-
-    public static Operation s() {
-        return s_Singleton;
-    }
+public class Operation extends Baseclass  {
     private boolean auditable;
     private Access defaultaccess;
     @ManyToOne(targetEntity = DynamicInvoker.class)

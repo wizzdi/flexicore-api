@@ -49,6 +49,7 @@ public interface TenantService extends FlexiCoreService {
      * @param securityContext security context of the user to execute the action
      * @return
      */
+    @Deprecated
     Tenant createNewTenant(NewUser tenantAdmin, String name, String apiKey, SecurityContext securityContext);
 
     /**

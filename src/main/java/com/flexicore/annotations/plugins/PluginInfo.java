@@ -13,14 +13,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Qualifier
-
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PluginInfo {
-	int DEFAULT_ORDER=100;
 	int version();
-	@Nonbinding boolean autoInstansiate() default false;
-	@Nonbinding int order() default DEFAULT_ORDER;
-
-
-
 }

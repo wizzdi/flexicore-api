@@ -2,15 +2,17 @@ package com.flexicore.interfaces;
 
 import com.flexicore.annotations.Baseclassroot;
 import com.flexicore.data.BaseclassRepository;
-import com.flexicore.data.jsoncontainers.BaseclassCreationContainer;
-import com.flexicore.model.*;
+import com.flexicore.model.Baseclass;
+import com.flexicore.model.Operation;
+import com.flexicore.model.QueryInformationHolder;
+import com.flexicore.model.SortParameter;
+import com.flexicore.model.Tenant;
+import com.flexicore.model.User;
 import com.flexicore.request.MassDeleteRequest;
 import com.flexicore.security.SecurityContext;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateless;
-
 import org.pf4j.ExtensionPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import javax.persistence.EntityManager;
@@ -263,9 +265,6 @@ public abstract class AbstractRepositoryPlugin implements PluginRepository, Exte
         baseclassRepository.setEm(em);
     }
 
-    public <T extends Baseclass> T createBaseclass(BaseclassCreationContainer container, SecurityContext securityContext) {
-        return baseclassRepository.createBaseclass(container, securityContext);
-    }
 
     public void refrehEntityManager() {
         baseclassRepository.refrehEntityManager();

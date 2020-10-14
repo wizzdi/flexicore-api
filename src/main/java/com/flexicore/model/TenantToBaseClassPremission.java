@@ -19,8 +19,8 @@ import com.flexicore.security.SecurityContext;
 @Entity
 
 public class TenantToBaseClassPremission extends SecurityLink {
-	private static TenantToBaseClassPremission s_Singleton=new TenantToBaseClassPremission();
-	public  static TenantToBaseClassPremission s() {return s_Singleton;}
+
+
 
 	@ManyToOne(targetEntity = Tenant.class)
 	@Override

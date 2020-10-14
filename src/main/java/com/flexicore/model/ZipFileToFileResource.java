@@ -7,8 +7,8 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class ZipFileToFileResource extends Baseclass {
-    static ZipFileToFileResource s_Singleton = new ZipFileToFileResource();
-    public static ZipFileToFileResource s() { return s_Singleton; }
+
+
 
     public ZipFileToFileResource() {
     }

@@ -9,6 +9,7 @@ package com.flexicore.security;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.flexicore.model.User;
 
+@Deprecated
 public class NewUser<T extends User> {
 
     private String email;

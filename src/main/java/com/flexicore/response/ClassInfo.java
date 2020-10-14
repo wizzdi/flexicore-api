@@ -18,7 +18,7 @@ public class ClassInfo {
 
     public ClassInfo(Class<?> clazz, AnnotatedClazz annotatedClazz) {
         this.clazz = clazz;
-        Clazz clazzbyname = Baseclass.getClazzbyname(clazz.getCanonicalName());
+        Clazz clazzbyname = Baseclass.getClazzByName(clazz.getCanonicalName());
         this.clazzId= clazzbyname!=null?clazzbyname.getId():null;
         this.displayName=annotatedClazz!=null&&!annotatedClazz.DisplayName().isEmpty()?annotatedClazz.DisplayName():clazz.getSimpleName();
         this.description=annotatedClazz!=null?annotatedClazz.Description():"No Description";

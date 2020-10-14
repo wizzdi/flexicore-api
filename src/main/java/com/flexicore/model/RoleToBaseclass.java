@@ -16,8 +16,6 @@ import com.flexicore.security.SecurityContext;
 @SuppressWarnings("serial")
 @AnnotatedClazz(Category="Premissions", Name="UserToBaseClass", Description="User Premission on Baseclass")
 @Entity
-
-
 public class RoleToBaseclass extends SecurityLink {
 
 

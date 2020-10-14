@@ -17,8 +17,8 @@ import javax.persistence.ManyToOne;
 @Entity
 
 public class PermissionGroupToBaseclass extends Baselink {
-	private static PermissionGroupToBaseclass s_Singleton=new PermissionGroupToBaseclass();
-	public  static PermissionGroupToBaseclass s() {return s_Singleton;}
+
+
 
 	public PermissionGroupToBaseclass() {
 	}

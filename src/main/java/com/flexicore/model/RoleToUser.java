@@ -29,8 +29,6 @@ public class RoleToUser extends Baselink  {
 
 
 	@ManyToOne(targetEntity = Role.class)
-	//@JoinColumn(name = "leftside", referencedColumnName = "id")
-
 	@Override
 	public Role getLeftside() {
 		return (Role) super.getLeftside();
@@ -46,8 +44,6 @@ public class RoleToUser extends Baselink  {
 
 
 	@ManyToOne(targetEntity = User.class)
-	//@JoinColumn(name = "rightside", referencedColumnName = "id")
-
 	@Override
 	public User getRightside() {
 		return (User) super.getRightside();

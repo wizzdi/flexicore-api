@@ -2,7 +2,6 @@ package com.flexicore.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.flexicore.annotations.AnnotatedClazz;
-import com.flexicore.data.jsoncontainers.BaseclassUpdateContainer;
 import com.flexicore.data.jsoncontainers.CrossLoaderResolver;
 import com.flexicore.data.jsoncontainers.PaginationResponse;
 import com.flexicore.data.jsoncontainers.SetBaseclassTenantRequest;
@@ -141,9 +140,6 @@ public interface BaseclassService extends FlexiCoreService {
                                                 SecurityContext securityContext);
 
     <T extends Baseclass> List<T> getAllUnsecure(Class<T> c);
-
-    <T extends Baseclass> boolean updateInfo(String id, String clazzName,
-                                             BaseclassUpdateContainer updateContainer, SecurityContext securityContext) throws ClassNotFoundException;
 
     void merge(Object base);
 

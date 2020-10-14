@@ -1,6 +1,5 @@
 package com.flexicore.service;
 
-import com.flexicore.data.jsoncontainers.LinkContainer;
 import com.flexicore.data.jsoncontainers.PaginationResponse;
 import com.flexicore.interfaces.FlexiCoreService;
 import com.flexicore.model.Baseclass;
@@ -48,9 +47,6 @@ public interface BaselinkService extends FlexiCoreService {
 
     <T extends Baselink> List<T> findAllBySides(Class<T> type, Baseclass left, Baseclass right,
                                                 SecurityContext securityContext);
-
-    <T extends Baselink> List<LinkContainer> findAllBySidesAndValueContainers(Class<T> type, Baseclass left, Baseclass right, Baseclass value, String simpleValue, FilteringInformationHolder filter,
-                                                                              int pagesize, int current, SecurityContext securityContext);
 
     <T extends Baselink> List<T> findAllBySidesAndValue(Class<T> type, Baseclass left, Baseclass right, Baseclass value, String simpleValue, FilteringInformationHolder filter,
                                                         int pagesize, int current, SecurityContext securityContext);

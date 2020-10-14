@@ -15,8 +15,8 @@ import javax.persistence.Entity;
 @Entity
 
 public class DocumentationTag extends Baseclass {
-	private static DocumentationTag s_Singleton=new DocumentationTag();
-	public  static DocumentationTag s() {return s_Singleton;}
+
+
 	
 	
 

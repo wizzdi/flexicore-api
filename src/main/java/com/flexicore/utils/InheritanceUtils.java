@@ -59,7 +59,7 @@ public class InheritanceUtils {
         Set<ClassInfo> classes = listInheritingClasses(getClassInfo.getClassName());
         for (ClassInfo aClass : classes) {
             if (aClass.getClazzId() == null && aClass.getClazz() != null) {
-                Clazz clazzbyname = Baseclass.getClazzbyname(aClass.getClazz().getCanonicalName());
+                Clazz clazzbyname = Baseclass.getClazzByName(aClass.getClazz().getCanonicalName());
                 aClass.setClazzId(clazzbyname != null ? clazzbyname.getId() : null);
             }
         }

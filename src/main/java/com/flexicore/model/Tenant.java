@@ -23,24 +23,13 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 @AnnotatedClazz(Category="core", Name="Tenant", Description="Defines a way to run different isolated virtual database on a single physical one")
-//@Cache(type=CacheType.FULL)
 @Entity
-
-
 @FullTextSearch(supported = true)
-public class Tenant extends SecurityEntity implements Serializable {
-	static Tenant s_Singleton=new Tenant();
-	public  static Tenant s() {return s_Singleton;}
-
-
+public class Tenant extends SecurityEntity  {
 
 	private String externalId;
 	@ManyToOne(targetEntity = FileResource.class)
 	private FileResource icon;
-
-
-
-
 
 	@JsonIgnore
 	@OneToMany(targetEntity = TenantToBaseClassPremission.class,mappedBy="leftside", fetch=FetchType.LAZY)
@@ -50,10 +39,6 @@ public class Tenant extends SecurityEntity implements Serializable {
 	@OneToMany(targetEntity = TenantToUser.class,mappedBy="leftside", fetch=FetchType.LAZY)
 	@JsonIgnore
 	private List<TenantToUser> tenantToUser=new ArrayList<>();
-	
-	@Column(unique=true)
-	private String apiKey;
-
 
 	@JsonIgnore
 	@OneToMany(targetEntity = TenantToUser.class,mappedBy="leftside", fetch=FetchType.LAZY)
@@ -73,27 +58,6 @@ public class Tenant extends SecurityEntity implements Serializable {
 	public Tenant(String name, SecurityContext securityContext) {
 		super(name, securityContext);
 	}
-
-	@Column(unique=true)
-	public String getApiKey() {
-		return apiKey;
-	}
-
-
-
-
-
-
-	public void setApiKey(String apiKey) {
-		this.apiKey = apiKey;
-	}
-	
-	
-	@Override
-	public void setParameter1(Object parameter1) {
-		setApiKey((String) parameter1);
-	}
-
 
 	public String getExternalId() {
 		return externalId;
@@ -115,13 +79,9 @@ public class Tenant extends SecurityEntity implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Tenant [" + (name != null ? "name=" + name + ", " : "")
-				+ (apiKey != null ? "apiKey=" + apiKey : "") + "]";
+		return "Tenant{" +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
+				'}';
 	}
-
-
-
-
-
-
 }

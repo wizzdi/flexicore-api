@@ -17,7 +17,7 @@ import java.io.Serializable;
  * @author avishayb
  */
 
-public class AuthenticationBundle implements Serializable {
+public class AuthenticationBundle  {
     /**
      *
      */

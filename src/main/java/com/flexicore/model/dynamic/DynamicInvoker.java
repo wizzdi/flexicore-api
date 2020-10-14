@@ -13,8 +13,8 @@ import java.util.List;
 
 @Entity
 public class DynamicInvoker extends Baseclass {
-    private static DynamicInvoker s_Singleton=new DynamicInvoker();
-    public  static DynamicInvoker s() {return s_Singleton;}
+
+
 
     public DynamicInvoker() {
     }

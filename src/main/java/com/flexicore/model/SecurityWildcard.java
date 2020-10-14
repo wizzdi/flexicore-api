@@ -12,8 +12,8 @@ import javax.persistence.Entity;
 
 @Entity
 public class SecurityWildcard extends Baseclass {
-	private static SecurityWildcard s_Singleton=new SecurityWildcard();
-	public  static SecurityWildcard s() {return s_Singleton;}
+
+
 
 	public SecurityWildcard() {
 	}

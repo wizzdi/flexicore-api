@@ -32,9 +32,6 @@ public interface UserService extends FlexiCoreService {
      * @param toMerge
      */
     void massMerge(List<?> toMerge);
-    @Deprecated
-    <T extends User> RunningUser register(NewUser<T> newuser, boolean shouldlogin, SecurityContext securityContext)
-            throws ClassNotFoundException, InstantiationException, IllegalAccessException, Exception;
 
     /**
      * creates a User
@@ -67,24 +64,6 @@ public interface UserService extends FlexiCoreService {
      * @return if anything was changed
      */
     boolean updateUserNoMerge(User user, UserCreate createUser);
-
-    @Deprecated
-    <T extends User> RunningUser register(NewUser<T> newuser, boolean shouldlogin, SecurityContext securityContext, Tenant tenant)
-                    throws Exception;
-
-    @Deprecated
-    <T extends User> RunningUser registerNoMerge(NewUser<T> newuser, boolean shouldlogin, SecurityContext securityContext)
-                            throws ClassNotFoundException, InstantiationException, IllegalAccessException;
-
-    @Deprecated
-    <T extends User> RunningUser registerNoMerge(NewUser<T> newuser, boolean shouldlogin, SecurityContext securityContext, Tenant tenant)
-                                    throws ClassNotFoundException, InstantiationException, IllegalAccessException;
-
-
-
-    @Deprecated
-    boolean attachTenant(String authenticationKey, String apiKey, SecurityContext securityContext);
-
 
     RunningUser getRunningUser(String authenticationKey);
 

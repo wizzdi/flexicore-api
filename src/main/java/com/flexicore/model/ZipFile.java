@@ -10,8 +10,8 @@ import java.util.List;
 
 @Entity
 public class ZipFile extends FileResource {
-    static ZipFile s_Singleton = new ZipFile();
-    public static ZipFile s() { return s_Singleton; }
+
+
 
     public ZipFile() {
     }
