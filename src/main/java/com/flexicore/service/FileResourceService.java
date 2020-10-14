@@ -55,6 +55,14 @@ public interface FileResourceService extends FlexiCoreService {
      */
     FileResource create(String pathToFileResource, SecurityContext securityContext);
 
+    /**
+     * creates file resource
+     * @param fileResourceCreate create object
+     * @param securityContext security context of the user to execute the action
+     * @return the created file resource
+     */
+    FileResource createFileResource(FileResourceCreate fileResourceCreate, SecurityContext securityContext);
+
     void persist(Object o);
 
     /**
@@ -80,10 +88,6 @@ public interface FileResourceService extends FlexiCoreService {
      * @return true if there was an update , false otherwise
      */
     boolean updateFileResourceNoMerge(FileResourceCreate fileResourceCreate, FileResource fileResource);
-
-    @Deprecated
-    <T extends FileResource> T createDontPersist(Class<T> c, String pathToFileResource, SecurityContext securityContext);
-
     /**
      * generates MD5 hash
      * @param is inputStream

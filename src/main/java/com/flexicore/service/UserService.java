@@ -156,9 +156,6 @@ public interface UserService extends FlexiCoreService {
      */
     void refrehEntityManager();
 
-    @Deprecated
-    void validateAndpopulateNewUser(NewUser tenantAdmin);
-
     /**
      * returns System admin user
      * @return

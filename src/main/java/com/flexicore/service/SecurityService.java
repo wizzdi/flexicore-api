@@ -22,7 +22,7 @@ public interface SecurityService extends FlexiCoreService {
 
     boolean checkIfAllowed(User user, List<Tenant> tenants, Operation operation, IOperation.Access access);
 
-    SecurityContext getSecurityContext(String authenticationkey, String tenantApi, String operationId);
+    SecurityContext getSecurityContext(String authenticationkey, String operationId);
 
     OperationInfo getIOperation(Method method);
 

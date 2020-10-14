@@ -26,7 +26,7 @@ import java.util.Properties;
  */
 public class JobInformation {
     private Class<? extends ProccessPlugin> handler;
-    private Serializable jobInfo;
+    private Object jobInfo;
     private boolean handle;
     private Result previousPhaseResult;
     private Result currrentPhaseResult;
@@ -86,12 +86,12 @@ public class JobInformation {
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
     @JsonSubTypes({@Type(value = FileResource.class)})
     @JsonIgnore
-    public Serializable getJobInfo() {
+    public Object getJobInfo() {
         return jobInfo;
     }
 
 
-    public void setJobInfo(Serializable jobInfo) {
+    public void setJobInfo(Object jobInfo) {
         this.jobInfo = jobInfo;
     }
 

@@ -23,19 +23,15 @@ public class AuthenticationBundle  {
      */
     private static final long serialVersionUID = 1L;
     private String mail;
-    private String apikey;
     private String authenticationkey;
 
-    public AuthenticationBundle(String mail, String apikey) {
+    public AuthenticationBundle(String mail) {
         this.mail = mail;
-        this.apikey = apikey;
     }
 
     public AuthenticationBundle() {
 
     }
-
-    ////@ApiModelProperty(value = "mail used to get this authentication bundle")
 
     public String getMail() {
         return mail;
@@ -45,21 +41,11 @@ public class AuthenticationBundle  {
         this.mail = mail;
     }
 
-    ////@ApiModelProperty(value = "tenant's api key that is relevant for this authenticationBundle")
-    public String getApikey() {
-        return apikey;
-    }
-
-    public void setApikey(String apikey) {
-        this.apikey = apikey;
-    }
-
     /**
      * the token use with subsequent calls to secured REST methods.
      *
      * @return
      */
-    ////@ApiModelProperty(value = "authentication key to use for subsequent against the secure api")
     public String getAuthenticationkey() {
         return authenticationkey;
     }
@@ -71,7 +57,6 @@ public class AuthenticationBundle  {
     @Override
     public String toString() {
         return "AuthenticationBundle [" + (mail != null ? "mail=" + mail + ", " : "")
-                + (apikey != null ? "apikey=" + apikey + ", " : "")
                 + (authenticationkey != null ? "authenticationkey=" + authenticationkey : "") + "]";
     }
 

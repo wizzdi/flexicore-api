@@ -6,7 +6,6 @@ public class FileResourceCreate extends BaseclassCreate {
     private String md5;
     private String fullPath;
     private String actualFilename;
-    private String url;
     private String originalFilename;
     private Long offset;
 
@@ -35,15 +34,6 @@ public class FileResourceCreate extends BaseclassCreate {
 
     public <T extends FileResourceCreate> T setActualFilename(String actualFilename) {
         this.actualFilename = actualFilename;
-        return (T) this;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public <T extends FileResourceCreate> T setUrl(String url) {
-        this.url = url;
         return (T) this;
     }
 

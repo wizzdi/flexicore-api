@@ -25,7 +25,7 @@ public interface JobService extends FlexiCoreService {
         sessionMap.remove(session.getId());
     }
     @Deprecated
-    Job startJob(Serializable content, Class<? extends ProccessPlugin> type,
+    Job startJob(Object content, Class<? extends ProccessPlugin> type,
                         Properties jobprops, HashMap<String, Object> requriments, SecurityContext securityContext);
     void startJob(Job job, SecurityContext securityContext);
     void setJobDefualts(Job job);

@@ -22,56 +22,49 @@ public class UserCreate extends BaseclassCreate {
     private User approvingUser;
 
 
-
     public String getEmail() {
         return email;
     }
 
-    public UserCreate setEmail(String email) {
+    public <T extends UserCreate> T setEmail(String email) {
         this.email = email;
-        return this;
+        return (T) this;
     }
-
-
 
     public String getLastName() {
         return lastName;
     }
 
-    public UserCreate setLastName(String lastName) {
+    public <T extends UserCreate> T setLastName(String lastName) {
         this.lastName = lastName;
-        return this;
+        return (T) this;
     }
-
-
-
 
     public String getPassword() {
         return password;
     }
 
-    public UserCreate setPassword(String password) {
+    public <T extends UserCreate> T setPassword(String password) {
         this.password = password;
-        return this;
+        return (T) this;
     }
 
-    @JsonAlias("phonenumber")
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public UserCreate setPhoneNumber(String phoneNumber) {
+    public <T extends UserCreate> T setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-        return this;
+        return (T) this;
     }
 
     public String getUiConfiguration() {
         return uiConfiguration;
     }
 
-    public UserCreate setUiConfiguration(String uiConfiguration) {
+    public <T extends UserCreate> T setUiConfiguration(String uiConfiguration) {
         this.uiConfiguration = uiConfiguration;
-        return this;
+        return (T) this;
     }
 
     @JsonIgnore

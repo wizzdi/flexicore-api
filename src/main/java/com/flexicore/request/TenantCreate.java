@@ -5,7 +5,6 @@ import com.flexicore.model.FileResource;
 
 public class TenantCreate extends BaseclassCreate {
     private UserCreate tenantAdmin;
-    private String apiKey;
     private String iconId;
     @JsonIgnore
     private FileResource icon;
@@ -19,16 +18,6 @@ public class TenantCreate extends BaseclassCreate {
         return this;
     }
 
-
-
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    public TenantCreate setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-        return this;
-    }
 
     public String getIconId() {
         return iconId;

@@ -41,27 +41,6 @@ public interface TenantService extends FlexiCoreService {
      */
     void validateUpdate(TenantUpdate tenantUpdate, SecurityContext securityContext);
 
-    /**
-     * creates a tenant with a tenant admin
-     * @param tenantAdmin
-     * @param name
-     * @param apiKey
-     * @param securityContext security context of the user to execute the action
-     * @return
-     */
-    @Deprecated
-    Tenant createNewTenant(NewUser tenantAdmin, String name, String apiKey, SecurityContext securityContext);
-
-    /**
-     * creates a tenant without tenant admin user
-     * @param name
-     * @param apiKey
-     * @param securityContext security context of the user to execute the action
-     * @return
-     */
-    Tenant createTenantNoUser(String name, String apiKey, SecurityContext securityContext);
-
-    Tenant getTenantByApiKey(String apiKey);
 
     /**
      * updates a tenant

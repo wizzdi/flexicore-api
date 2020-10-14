@@ -15,9 +15,9 @@ public class UserUpdate extends UserCreate {
         return id;
     }
 
-    public UserUpdate setId(String id) {
+    public <T extends UserUpdate> T setId(String id) {
         this.id = id;
-        return this;
+        return (T) this;
     }
 
     @JsonIgnore
@@ -25,8 +25,8 @@ public class UserUpdate extends UserCreate {
         return user;
     }
 
-    public UserUpdate setUser(User user) {
+    public <T extends UserUpdate> T setUser(User user) {
         this.user = user;
-        return this;
+        return (T) this;
     }
 }
