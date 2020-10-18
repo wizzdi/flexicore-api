@@ -16,6 +16,9 @@ import com.flexicore.data.jsoncontainers.Views;
 import com.flexicore.data.jsoncontainers.Views.Full;
 import com.flexicore.interfaces.Syncable;
 import com.flexicore.security.SecurityContext;
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Hex;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -142,7 +145,18 @@ public class Baseclass implements Syncable {
     }
 
     public static String getBase64ID() {
-        return UUID.randomUUID().toString();
+        String result;
+        try {
+            result = new String(Base64.encodeBase64(Hex.decodeHex(UUID.randomUUID().toString().replaceAll("-", "")
+                    .toCharArray())));
+            result = result.replace("/", "-"); // we cannot afford a slash
+            result = result.substring(0, 22); //we don't need the trailing ==
+
+        } catch (DecoderException e) {
+            result = "errorinid";
+        }
+
+        return result;
     }
 
 
