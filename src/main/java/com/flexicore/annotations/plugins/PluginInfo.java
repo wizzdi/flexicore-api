@@ -8,7 +8,6 @@ package com.flexicore.annotations.plugins;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import javax.enterprise.util.Nonbinding;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
