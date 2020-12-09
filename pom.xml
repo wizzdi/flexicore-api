@@ -4,7 +4,7 @@
 
     <groupId>com.wizzdi</groupId>
     <artifactId>flexicore-api</artifactId>
-    <version>4.2.5-SNAPSHOT</version>
+    <version>4.2.4-SNAPSHOT</version>
     <name>flexicore-api</name>
     <description>flexicore api dependency</description>
     <url>https://wizzdi.com</url>
@@ -302,6 +302,7 @@
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    <stagingProgressTimeoutMinutes>10</stagingProgressTimeoutMinutes>
                 </configuration>
             </plugin>
 
