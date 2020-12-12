@@ -39,7 +39,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <swagger.version>2.0.8</swagger.version>
         <version.resteasy>3.6.3.Final</version.resteasy>
-        <pf4j-spring.version>0.6.0</pf4j-spring.version>
+        <pf4j-spring.version>0.7.0</pf4j-spring.version>
         <version.eclipselink>2.7.7</version.eclipselink>
     </properties>
     <scm>

@@ -14,6 +14,7 @@ import com.flexicore.model.Tenant;
 import com.flexicore.model.User;
 
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 
@@ -25,7 +26,8 @@ public class SecurityContext  {
 	private User user;
 	private Operation operation;
 	private boolean impersonated;
-
+	private boolean totpVerified;
+	private OffsetDateTime expiresDate;
 	private Tenant tenantToCreateIn;
 
 	public SecurityContext(List<Tenant> tenants, User user, Operation operation, Tenant tenantToCreateIn) {
@@ -90,6 +92,24 @@ public class SecurityContext  {
 
 	public <T extends SecurityContext> T setImpersonated(boolean impersonated) {
 		this.impersonated = impersonated;
+		return (T) this;
+	}
+
+	public boolean isTotpVerified() {
+		return totpVerified;
+	}
+
+	public <T extends SecurityContext> T setTotpVerified(boolean totpVerified) {
+		this.totpVerified = totpVerified;
+		return (T) this;
+	}
+
+	public OffsetDateTime getExpiresDate() {
+		return expiresDate;
+	}
+
+	public <T extends SecurityContext> T setExpiresDate(OffsetDateTime expiresDate) {
+		this.expiresDate = expiresDate;
 		return (T) this;
 	}
 }
