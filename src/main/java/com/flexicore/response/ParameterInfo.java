@@ -6,6 +6,8 @@ import com.flexicore.interfaces.dynamic.ListFieldInfo;
 
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ParameterInfo {
 
@@ -25,6 +27,7 @@ public class ParameterInfo {
     private boolean actionId;
     private Class<?> idRefType;
     private List<ParameterInfo> subParameters;
+    private Set<String> possibleValues;
     private static Set<Class<?>> wrappers = new HashSet<>();
 
     static {
@@ -60,6 +63,12 @@ public class ParameterInfo {
 
 
         Class<?> type = parameter.getType();
+        if(type.isEnum()){
+            Class<? extends Enum> enumType= (Class<? extends Enum>) type;
+            EnumSet enumSet = EnumSet.allOf(enumType);
+            Stream<Enum<?>> stream = enumSet.stream();
+            possibleValues= stream.map(f->f.name()).collect(Collectors.toSet());
+        }
         iterateFields(type);
 
 
@@ -83,7 +92,7 @@ public class ParameterInfo {
     }
 
     private void iterateFields(Class<?> type) {
-        if (!type.isPrimitive() || !wrappers.contains(type)) {
+        if (!type.isPrimitive() || !wrappers.contains(type) || !type.isEnum()) {
             subParameters = new ArrayList<>();
             for (Field field : getAllFields(type)) {
 
@@ -285,6 +294,15 @@ public class ParameterInfo {
 
     public <T extends ParameterInfo> T setActionId(boolean actionId) {
         this.actionId = actionId;
+        return (T) this;
+    }
+
+    public Set<String> getPossibleValues() {
+        return possibleValues;
+    }
+
+    public <T extends ParameterInfo> T setPossibleValues(Set<String> possibleValues) {
+        this.possibleValues = possibleValues;
         return (T) this;
     }
 }
