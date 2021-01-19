@@ -11,6 +11,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface InvokerMethodInfo {
+    Class<?> listType() default Void.class;
     String displayName() default "";
     String description() default "";
     String[] categories() default {};

@@ -26,6 +26,7 @@ public class InvokerMethodInfo {
     private Set<String> relatedMethodNames;
     private String returnType;
     private String parameterHolderType;
+    private Class<?> listType;
     private List<ParameterInfo> parameters=new ArrayList<>();
 
     public InvokerMethodInfo(Method method, com.flexicore.interfaces.dynamic.InvokerMethodInfo invokerMethodInfo) {
@@ -37,7 +38,7 @@ public class InvokerMethodInfo {
         returnType=method.getReturnType()!=null?method.getReturnType().getCanonicalName():null;
         this.categories=invokerMethodInfo!=null? Stream.of(invokerMethodInfo.categories()).collect(Collectors.toSet()) : Collections.emptySet();
         this.relatedMethodNames=invokerMethodInfo!=null? Stream.of(invokerMethodInfo.relatedMethodNames()).collect(Collectors.toSet()) : Collections.emptySet();
-
+        this.listType=invokerMethodInfo!=null&&!Void.class.equals(invokerMethodInfo.listType())?invokerMethodInfo.listType():null;
         Parameter[] parameters=method.getParameters();
         if(parameters.length>0){
             Parameter parameter=parameters[0];
@@ -144,6 +145,15 @@ public class InvokerMethodInfo {
 
     public <T extends InvokerMethodInfo> T setRelatedMethodNames(Set<String> relatedMethodNames) {
         this.relatedMethodNames = relatedMethodNames;
+        return (T) this;
+    }
+
+    public Class<?> getListType() {
+        return listType;
+    }
+
+    public <T extends InvokerMethodInfo> T setListType(Class<?> listType) {
+        this.listType = listType;
         return (T) this;
     }
 }
