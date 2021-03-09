@@ -25,6 +25,7 @@ public class ParameterInfo {
     private boolean list;
     private boolean mandatory;
     private boolean actionId;
+    private boolean actionIdHolder;
     private Class<?> idRefType;
     private List<ParameterInfo> subParameters;
     private Set<String> possibleValues;
@@ -53,6 +54,7 @@ public class ParameterInfo {
             this.mandatory = fieldInfo.mandatory();
             this.defaultValue = fieldInfo.defaultValue();
             this.regexValidation = fieldInfo.regexValidation();
+            this.actionIdHolder=fieldInfo.actionIdHolder();
             if (fieldInfo.rangeEnabled()) {
                 this.rangeMin = fieldInfo.rangeMin();
                 this.rangeMax = fieldInfo.rangeMax();
@@ -303,6 +305,15 @@ public class ParameterInfo {
 
     public <T extends ParameterInfo> T setPossibleValues(Set<String> possibleValues) {
         this.possibleValues = possibleValues;
+        return (T) this;
+    }
+
+    public boolean isActionIdHolder() {
+        return actionIdHolder;
+    }
+
+    public <T extends ParameterInfo> T setActionIdHolder(boolean actionIdHolder) {
+        this.actionIdHolder = actionIdHolder;
         return (T) this;
     }
 }

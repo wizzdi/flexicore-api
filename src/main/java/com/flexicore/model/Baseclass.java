@@ -345,6 +345,7 @@ public class Baseclass implements Syncable {
         return jsonNode;
     }
 
+    @Convert(converter = JsonConverter.class)
     public <T extends Baseclass> T setJsonNode(Map<String, Object> jsonNode) {
         this.jsonNode = jsonNode;
         return (T) this;
