@@ -23,10 +23,7 @@ import org.apache.commons.codec.binary.Hex;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -343,6 +340,13 @@ public class Baseclass implements Syncable {
     @JsonAnyGetter
     public Map<String, Object> any() {
         return jsonNode;
+    }
+    @JsonAnySetter
+    public void setProperty(String key,Object value) {
+        if(jsonNode==null){
+            jsonNode=new HashMap<>();
+        }
+        jsonNode.put(key,value);
     }
 
     public <T extends Baseclass> T setJsonNode(Map<String, Object> jsonNode) {

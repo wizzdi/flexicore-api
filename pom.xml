@@ -4,7 +4,7 @@
 
     <groupId>com.wizzdi</groupId>
     <artifactId>flexicore-api</artifactId>
-    <version>4.2.10-SNAPSHOT</version>
+    <version>4.2.9-HOTFIX1</version>
     <name>flexicore-api</name>
     <description>flexicore api dependency</description>
     <url>https://wizzdi.com</url>
