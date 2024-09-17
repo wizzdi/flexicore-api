@@ -55,6 +55,7 @@ public class ObjectMapperContextResolver implements ContextResolver<ObjectMapper
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         mapper.configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, false);
         mapper.configure(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS,false);
+        mapper.configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE,true);
         JavaTimeModule module = new JavaTimeModule();
         CustomOffsetDateTimeSerializer customOffsetDateTimeSerializer = new CustomOffsetDateTimeSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX"));
         module.addSerializer(OffsetDateTime.class, customOffsetDateTimeSerializer);
